@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7807FCC3202FDFBA000EEA96 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7807FCC1202FDFBA000EEA96 /* Game.cpp */; };
 		78552B15202FCA29000C6620 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78552B14202FCA29000C6620 /* main.cpp */; };
+		78552B23202FCDD9000C6620 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78552B22202FCDD9000C6620 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7807FCC1202FDFBA000EEA96 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		7807FCC2202FDFBA000EEA96 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		78552B11202FCA29000C6620 /* Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		78552B14202FCA29000C6620 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		78552B1C202FCB77000C6620 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		78552B1E202FCD30000C6620 /* glew-2.1.0 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "glew-2.1.0"; path = "../../../Library/Frameworks/glew-2.1.0"; sourceTree = "<group>"; };
+		78552B1F202FCD30000C6620 /* glfw-3.2.1 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "glfw-3.2.1"; path = "../../../Library/Frameworks/glfw-3.2.1"; sourceTree = "<group>"; };
+		78552B22202FCDD9000C6620 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78552B23202FCDD9000C6620 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +52,7 @@
 			children = (
 				78552B13202FCA29000C6620 /* Engine */,
 				78552B12202FCA29000C6620 /* Products */,
+				78552B1B202FCB77000C6620 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +68,21 @@
 			isa = PBXGroup;
 			children = (
 				78552B14202FCA29000C6620 /* main.cpp */,
+				7807FCC1202FDFBA000EEA96 /* Game.cpp */,
+				7807FCC2202FDFBA000EEA96 /* Game.hpp */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		78552B1B202FCB77000C6620 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78552B22202FCDD9000C6620 /* SDL2.framework */,
+				78552B1E202FCD30000C6620 /* glew-2.1.0 */,
+				78552B1F202FCD30000C6620 /* glfw-3.2.1 */,
+				78552B1C202FCB77000C6620 /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78552B15202FCA29000C6620 /* main.cpp in Sources */,
+				7807FCC3202FDFBA000EEA96 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +244,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = CT97W7A55Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -228,6 +256,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = CT97W7A55Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -251,6 +283,7 @@
 				78552B1A202FCA29000C6620 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
