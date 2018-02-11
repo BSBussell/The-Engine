@@ -11,6 +11,7 @@
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <iostream>
 
 class Engine {
 	
@@ -24,7 +25,7 @@ public:
 	void render();
 	void clean();
 	
-	bool running();
+	bool running()  { return isRunning; }
 	
 private:
 	
