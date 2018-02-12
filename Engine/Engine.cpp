@@ -8,8 +8,9 @@
 
 #include "Engine.hpp"
 #include "GameObject.hpp"
+#include "TextureManager.hpp"
 
-GameObject * player= nullptr;
+GameObject* player;
 
 
 Engine::Engine() {
@@ -45,11 +46,13 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 		
 		isRunning = true;
 
-		player = new GameObject("", renderer);
+		
 
 	} else {
 		isRunning = false;
 	}
+	
+	player = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png", renderer, 0, 0);
 }
 
 void Engine::handleEvents() {
