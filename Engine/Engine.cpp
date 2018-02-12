@@ -6,7 +6,11 @@
 //  Copyright © 2018 Benjamin Bussell. All rights reserved.
 //
 
-#include "Game.hpp"
+#include "Engine.hpp"
+#include "GameObject.hpp"
+
+GameObject * player= nullptr;
+
 
 Engine::Engine() {
 	
@@ -18,6 +22,8 @@ Engine::~Engine() {
 
 void Engine::init(const char *title, int xPos, int yPos, int width, int height, bool fullScreen) {
 	
+	
+
 	int flags = 0;
 	if (fullScreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -38,6 +44,9 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 		}
 		
 		isRunning = true;
+
+		player = new GameObject("", renderer);
+
 	} else {
 		isRunning = false;
 	}
@@ -55,15 +64,20 @@ void Engine::handleEvents() {
 		default:
 			break;
 	}
+	
 }
 
 void Engine::update() {
 	
+	player -> update();
+
 }
 
 void Engine::render() {
 	SDL_RenderClear(renderer);
 	// Draw Stuff Below. . .
+
+	player -> render();
 	SDL_RenderPresent(renderer);
 }
 
