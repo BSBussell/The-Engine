@@ -1,5 +1,5 @@
 //
-//  main.cpp
+//  main.jpg
 //  Engine
 //
 //  Created by Benjamin Bussell on 2/10/18.
@@ -23,7 +23,7 @@ int main( int argc, char* args[] ) {
 	engine = new Engine();
 
 	// Initalizes Window
-	engine -> init("The Engine",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,600,false);
+	engine -> init("The Engine",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,640,false);
 
 	while (engine -> running()) {
 		

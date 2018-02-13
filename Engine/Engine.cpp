@@ -9,8 +9,15 @@
 #include "Engine.hpp"
 #include "GameObject.hpp"
 #include "TextureManager.hpp"
+#include "Map.hpp"
+#include "Player.hpp"
 
-GameObject* player;
+
+//GameObject* player;
+Player* player;
+Map* map;
+
+SDL_Renderer* Engine::renderer = nullptr;
 
 
 Engine::Engine() {
@@ -52,18 +59,23 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 		isRunning = false;
 	}
 	
-	player = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png", renderer, 0, 0);
+	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png", 250, 250, 20);
+	map = new Map();
+
+	
 }
 
 void Engine::handleEvents() {
 	
 	SDL_Event event;
 	SDL_PollEvent(&event);
-	switch (event.type) {        // Stops Game Running when App is Quit
+	switch (event.type) {
 		case SDL_QUIT:
 			isRunning = false;
 			break;
-		
+		case SDL_KEYDOWN:
+			player -> events(event.key.keysym.sym);
+			break;
 		default:
 			break;
 	}
@@ -74,13 +86,17 @@ void Engine::update() {
 	
 	player -> update();
 
+	
+	
+
 }
 
 void Engine::render() {
 	SDL_RenderClear(renderer);
-	// Draw Stuff Below. . .
-
+	
+	map -> DrawMap();
 	player -> render();
+	
 	SDL_RenderPresent(renderer);
 }
 
@@ -93,9 +109,6 @@ void Engine::clean() {
 	std::cout << "Game Cleaned. . ." << std::endl;
 	
 }
-
-
-
 
 
 
