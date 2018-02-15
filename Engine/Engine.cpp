@@ -10,8 +10,9 @@
 #include "GameObject.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
-#include "Player.hpp"
 #include "Camera.hpp"
+#include "Player.hpp"
+
 
 Player* player;
 Map* map;
@@ -59,9 +60,11 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 		isRunning = false;
 	}
 	
+	camera = new Camera(0,0);
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png", 250, 250, 20);
 	map = new Map();
-	camera = new Camera(0,0);
+	
+	//camera -> zoom(2);
 }
 
 void Engine::handleEvents() {

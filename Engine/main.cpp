@@ -13,7 +13,7 @@ Engine *engine = nullptr;
 
 int main( int argc, char* args[] ) {
 
-	const int FPS = 60;
+	const int FPS = 120;
 	const int frameDelay = 1000 / FPS;
 	int fps =0;
 	

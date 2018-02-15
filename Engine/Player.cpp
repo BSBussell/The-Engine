@@ -43,10 +43,16 @@ void Player::update() {
 	player -> moveXBy(dx);
 	player -> moveYBy(dy);
 	
+	player -> moveXBy(dx);
+	player -> moveYBy(dy);
 	
 	player -> update();
 }
 
 void Player::render(Camera* camera) {
+	if (camera -> follow) {
+		camera -> moveXBy(-dx);
+		camera -> moveYBy(-dy);
+	}
 	player -> render(camera);
 }

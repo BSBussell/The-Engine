@@ -21,6 +21,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 }
 
 void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, Camera* camera) {
-	dest = camera->CalculateToCamera(dest);
+	
+	dest = camera -> CalculateToCamera(dest);
 	SDL_RenderCopy(Engine::renderer, tex, &src, &dest);
 }

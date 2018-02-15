@@ -16,6 +16,13 @@
 
 class GameObject {
 public:
+	/*!
+	 * @discussion Creates a Graphic from the source using a texture source, and a X and Y position
+	 * @param textureSheet  A String with the file path to your asset
+	 * @param ID A String with the ID used to find your Object
+	 * @param x  A Double specifing the X Position of the Object on the Screen
+	 * @param y  A Double specifing the Y Position of the Object on the Screen
+	 */
 	GameObject(const char* textureSheet, const char* ID, double x, double y);
 	~GameObject();
 	

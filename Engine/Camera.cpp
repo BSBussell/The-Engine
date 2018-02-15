@@ -9,7 +9,7 @@
 #include "Camera.hpp"
 #include "TextureManager.hpp"
 
-Camera::Camera(int x, int y) {
+Camera::Camera(double x, double y) {
 	
 	xPos = x;
 	yPos = y;
@@ -22,13 +22,15 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	
 	dest.x += xPos;
 	dest.y += yPos;
+	dest.h = dest.h * scale;
+	dest.w = dest.w * scale;
 	return dest;
 }
 
-void Camera::moveXBy(int x) {
+void Camera::moveXBy(double x) {
 	xPos += x;
 }
 
-void Camera::moveYBy(int y) {
+void Camera::moveYBy(double y) {
 	yPos += y;
 }

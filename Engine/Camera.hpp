@@ -11,27 +11,34 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+//#include "GameObject.hpp"
 
 class Camera {
 public:
-	Camera(int x, int y);
+	Camera(double x, double y);
 	~Camera();
 	
 	
 	SDL_Rect CalculateToCamera( SDL_Rect dest);
 	void AddToCamera(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest);
 	
-	void moveXBy(int x);
-	void moveYBy(int y);
+	void moveXBy(double x);
+	void moveYBy(double y);
+	void zoom(double zoom) {scale = zoom;};
 	
-	int getX() {return xPos;};
-	int getY() {return yPos;};
+	bool follow = true;
+	//void follow(GameObject* object);
+	
+	double getX() {return xPos;};
+	double getY() {return yPos;};
 	
 	
 private:
 	
-	int xPos;
-	int yPos;
+	double xPos;
+	double yPos;
+	double scale = 1;
+	
 };
 
 #endif /* Camera_hpp */
