@@ -11,7 +11,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-//#include "GameObject.hpp"
+#include "GameObject.hpp"
+
+//class GameObject;
+
 
 class Camera {
 public:
@@ -24,10 +27,13 @@ public:
 	
 	void moveXBy(double x);
 	void moveYBy(double y);
+	
+	void moveTo(double x, double y, double lerp);
+	
 	void zoom(double zoom) {scale = zoom;};
 	
-	bool follow = true;
-	//void follow(GameObject* object);
+	
+	void followObject(GameObject* object);
 	
 	double getX() {return xPos;};
 	double getY() {return yPos;};
@@ -35,6 +41,7 @@ public:
 	
 private:
 	
+	bool follow = true;
 	double xPos;
 	double yPos;
 	double scale = 1;

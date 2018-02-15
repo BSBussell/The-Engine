@@ -28,9 +28,26 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 }
 
 void Camera::moveXBy(double x) {
-	xPos += x;
+	double lerp = 0.01f;
+	xPos += x*lerp;
 }
 
 void Camera::moveYBy(double y) {
-	yPos += y;
+	double lerp = 0.01f;
+	yPos += y*lerp;
+}
+
+void Camera::followObject(GameObject *object) {
+	
+	double objectX = object -> getX();
+	double objectY = object -> getY();
+	
+	moveTo(objectX,objectY, 1.0);
+}
+
+void Camera::moveTo(double X, double Y, double lerp = 1) {
+	
+	
+	xPos = (-X)+375;
+	yPos = (-Y)+295;
 }

@@ -43,8 +43,8 @@ Map::Map() {
 
 	src.x = dest.x =  0;
 	src.y = dest.y =  0;
-	src.w = dest.w = 32;
-	src.h = dest.h = 32;
+	src.w = dest.w = 128;
+	src.h = dest.h = 128;
 }
 
 void Map::LoadMap(int arr[20][25]) {
@@ -64,8 +64,8 @@ void Map::DrawMap(Camera* camera) {
 		for (int column = 0; column < 25; column++) {
 			
 			type = map[row][column];
-			dest.x = column * 32;
-			dest.y = row * 32;
+			dest.x = column * 128;
+			dest.y = row * 128;
 
 			switch(type) {
 				case 0:

@@ -12,7 +12,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Camera.hpp"
+//#include "Camera.hpp"
+class Camera;
 
 class GameObject {
 public:

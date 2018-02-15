@@ -17,6 +17,13 @@ class Player {
 	
 public:
 	
+	/*!
+	 * @discussion Creates Game Object for your player and manages movement for it
+	 * @param textureSrc The static sprite to use for your character
+	 * @param x The Inital X position your character will spawn on
+	 * @param y The Inital Y position your character will spawn on
+	 * @param maxSpeed The maximum speed your player will be able to move
+	 */
 	Player(const char* textureSrc, double x, double y, int maxSpeed);
 	~Player();
 	
@@ -25,7 +32,7 @@ public:
 	bool active;
 	
 	int Speed = 30;
-	double friction = 0.988;
+	double friction = 0.98;
 	
 	void events(SDL_Keycode event);
 	void update();
