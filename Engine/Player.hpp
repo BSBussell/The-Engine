@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "GameObject.hpp"
+#include "Camera.hpp"
 
 class Player {
 	
@@ -23,12 +24,12 @@ public:
 	
 	bool active;
 	
-	int Speed;
-	double friction = 0.99;
+	int Speed = 30;
+	double friction = 0.988;
 	
 	void events(SDL_Keycode event);
 	void update();
-	void render();
+	void render(Camera* camera);
 	
 protected:
 	

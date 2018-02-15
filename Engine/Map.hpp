@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Engine.hpp"
+#include "Camera.hpp"
 
 class Map {
 
@@ -20,7 +21,7 @@ public:
 	~Map();
 	
 	void LoadMap(int arr[20][25]);
-	void DrawMap();
+	void DrawMap(Camera* camera);
 	
 	
 private:

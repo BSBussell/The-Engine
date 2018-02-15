@@ -11,11 +11,11 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "Player.hpp"
+#include "Camera.hpp"
 
-
-//GameObject* player;
 Player* player;
 Map* map;
+Camera* camera;
 
 SDL_Renderer* Engine::renderer = nullptr;
 
@@ -32,9 +32,9 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	
 	
 
-	int flags = 0;
+	int flags = 0 | SDL_RENDERER_PRESENTVSYNC;
 	if (fullScreen) {
-		flags = SDL_WINDOW_FULLSCREEN;
+		flags = SDL_WINDOW_FULLSCREEN | SDL_RENDERER_PRESENTVSYNC;
 	}
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -61,8 +61,7 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png", 250, 250, 20);
 	map = new Map();
-
-	
+	camera = new Camera(0,0);
 }
 
 void Engine::handleEvents() {
@@ -85,17 +84,13 @@ void Engine::handleEvents() {
 void Engine::update() {
 	
 	player -> update();
-
-	
-	
-
 }
 
 void Engine::render() {
 	SDL_RenderClear(renderer);
 	
-	map -> DrawMap();
-	player -> render();
+	map -> DrawMap(camera);
+	player -> render(camera);
 	
 	SDL_RenderPresent(renderer);
 }

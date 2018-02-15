@@ -13,6 +13,8 @@
 #include <SDL2_image/SDL_image.h>
 #include <stdio.h>
 #include <iostream>
+#include "Camera.hpp"
+
 
 class Engine {
 	
@@ -25,6 +27,8 @@ public:
 	void update();
 	void render();
 	void clean();
+	
+	Camera* camera;
 	
 	bool running()  { return isRunning; }
 	

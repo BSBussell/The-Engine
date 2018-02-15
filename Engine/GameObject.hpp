@@ -12,25 +12,35 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Camera.hpp"
 
 class GameObject {
 public:
-	GameObject(const char* textureSheet, double x, double y);
+	GameObject(const char* textureSheet, const char* ID, double x, double y);
 	~GameObject();
 	
-	double xPos;
-	double yPos;
+	
 	
 	void update();
-	void render();
+	void render(Camera* camera);
 	
+	void moveXBy(double x);
+	void moveYBy(double y);
+	
+	int getX() {return xPos;};
+	int getY() {return yPos;};
 	
 	
 private:
 	
+	const char* ID;
+	
+	double xPos;
+	double yPos;
 	
 	SDL_Texture* objTexture;
 	SDL_Rect srcRect, destRect;
+	SDL_Rect scrnRect;
 	
 	
 };
