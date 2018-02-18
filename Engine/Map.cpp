@@ -56,12 +56,20 @@ void Map::LoadMap(int arr[20][25]) {
 	}
 }
 
+
 void Map::DrawMap(Camera* camera) {
 	
 	int type = 0;
-
-	for (int row = 0; row < 20; row++) {
-		for (int column = 0; column < 25; column++) {
+	
+	int xMax = abs(camera -> CalculateCamX(928)/128);
+	int xMin = (camera -> CalculateCamX(-128)/128);
+	int yMax = abs(camera -> CalculateCamY(768)/128);
+	int yMin = (camera -> CalculateCamY(-128)/128);
+	
+	
+	for (int row = yMin; row < yMax; row++) {
+		for (int column = xMin; column < xMax; column++) {
+			
 			
 			type = map[row][column];
 			dest.x = column * 128;

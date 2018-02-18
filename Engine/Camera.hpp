@@ -23,6 +23,9 @@ public:
 	
 	
 	SDL_Rect CalculateToCamera( SDL_Rect dest);
+	int CalculateCamX(int x) { return x - xPos; };
+	int CalculateCamY(int y) {return y - yPos; };
+	
 	void AddToCamera(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest);
 	
 	void moveXBy(double x);

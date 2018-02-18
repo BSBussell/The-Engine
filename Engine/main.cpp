@@ -28,7 +28,7 @@ int main( int argc, char* args[] ) {
 	Uint32 startTime = SDL_GetTicks();
 	int numFrames = 0;
 	// Initalizes Window
-	engine -> init("The Engine - ALPHA v0.0.1",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,640,false);
+	engine -> init("The Engine - ALPHA v0.0.2",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,640,false);
 
 	while (engine -> running()) {
 		
