@@ -51,3 +51,11 @@ void Camera::moveTo(double X, double Y, double lerp = 1) {
 	xPos = (-X)+375;
 	yPos = (-Y)+295;
 }
+
+bool Camera::cullCheck(int X, int Y) {
+	if (X < -128 || X > 800 || Y < -128 || Y > 640) {
+		return false;
+	} else {
+		return true;
+	}
+}
