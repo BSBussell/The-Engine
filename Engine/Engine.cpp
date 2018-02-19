@@ -39,6 +39,7 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	renderer = window -> getRenderer();
 	
 	camera = new Camera(0,0,window);
+	camera -> setCameraBounds(0, 0, 2205, 1928);
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 250, 250, 20);
 	
 	map = new Map();

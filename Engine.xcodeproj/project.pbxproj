@@ -66,6 +66,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78416A72203B45AD002AAB9B /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				78416A73203B45BA002AAB9B /* Scripts */,
+				78416A74203B45C1002AAB9B /* Headers */,
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
+		78416A73203B45BA002AAB9B /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		78416A74203B45C1002AAB9B /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 		78552B08202FCA29000C6620 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				78552B14202FCA29000C6620 /* main.cpp */,
+				78416A72203B45AD002AAB9B /* Physics */,
 				78BEADEB203132A100E925F6 /* Scripts */,
 				78BEADEC2031342400E925F6 /* Headers */,
 			);

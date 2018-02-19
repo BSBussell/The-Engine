@@ -39,6 +39,13 @@ public:
 	double getCenterX() {return xPos+375;};
 	double getCenterY() {return yPos+375;};
 	
+	void setCameraBounds(int x, int y, int width, int height) {
+		xBound = x;
+		yBound = y;
+		wBound = width;
+		hBound = height;
+	};
+	
 	bool viewCulling = true;
 	bool cullCheck(int X, int Y);
 	
@@ -60,10 +67,10 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
-	double xBound = 0.0;
-	double yBound = 0.0;
-	double wBound = 2205;
-	double hBound = 1928;
+	int xBound;
+	int yBound;
+	int wBound;
+	int hBound;
 	
 	Window* window;
 	double windowWidth;

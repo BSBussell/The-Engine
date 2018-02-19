@@ -44,13 +44,6 @@ void Camera::update(Window* wind) {
 	xPos += xVel;
 	yPos += yVel;
 	
-	std::cout << "xPos: " << xPos+xVel << std::endl;
-	std::cout << "Width Bound: " << wBound << std::endl;
-	std::cout << "yPos: " << yPos+yVel << std::endl;
-	
-	
-	
-	
 	window = wind;
 	windowWidth = wind -> getWidth();
 	windowHeight = wind -> getHeight();
