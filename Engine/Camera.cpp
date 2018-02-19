@@ -8,8 +8,9 @@
 
 #include "Camera.hpp"
 #include "TextureManager.hpp"
+#include "Window.hpp"
 
-Camera::Camera(double x, double y) {
+Camera::Camera(double x, double y, Window* window) {
 	
 	xPos = x;
 	yPos = y;
@@ -27,19 +28,32 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	return dest;
 }
 
-void Camera::update() {
+void Camera::update(Window* wind) {
 	
 	xVel = (xGoal - xPos)*friction;
 	yVel = (yGoal - yPos)*friction;
 	
+	
+	if ( xPos + xVel > xBound || xPos + xVel < -wBound) {
+		xVel = 0;
+	}
+	
+	if ( yPos + yVel > yBound || yPos + yVel < -hBound) {
+		yVel = 0;
+	}
 	xPos += xVel;
 	yPos += yVel;
 	
-	//xPos = ((xGoal - xPos));
-	//yPos = ((yGoal - yPos));
+	std::cout << "xPos: " << xPos+xVel << std::endl;
+	std::cout << "Width Bound: " << wBound << std::endl;
+	std::cout << "yPos: " << yPos+yVel << std::endl;
 	
-	std::cout << "xPos" << xGoal-xPos << std::endl;
-	std::cout << "yPos" << yGoal-yPos << std::endl;
+	
+	
+	
+	window = wind;
+	windowWidth = wind -> getWidth();
+	windowHeight = wind -> getHeight();
 }
 
 void Camera::moveXBy(double x) {
@@ -69,13 +83,13 @@ void Camera::followObject(GameObject *object) {
 
 void Camera::moveTo(double X, double Y, double lerp = 1.0) {
 	
-	
-	xGoal = ((-X)+375)*lerp;
-	yGoal = ((-Y)+295)*lerp;
+	xGoal = ((-X)+(windowWidth/2))*lerp;
+	yGoal = ((-Y)+(windowHeight/2))*lerp;
 }
 
 bool Camera::cullCheck(int X, int Y) {
-	if (X < -128 || X > 800 || Y < -128 || Y > 640) {
+	
+	if (X < -128 || X > (windowWidth*1.15) || Y < -128 || Y > (windowHeight*1.15)) {
 		return false;
 	} else {
 		return true;

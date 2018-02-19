@@ -57,15 +57,15 @@ void Map::LoadMap(int arr[20][25]) {
 }
 
 
-void Map::DrawMap(Camera* camera) {
+void Map::DrawMap(Camera* camera, Window* window) {
 	
 	int type = 0;
 	int xMax = 25;
 	int xMin = 0;
 	int yMax = 20;
 	int yMin = 0;
-	int windowW = 800;
-	int windowH = 640;
+	int windowW = window -> getWidth();
+	int windowH = window -> getHeight();
 	
 	/*
 		Calculates the lowest and highest values of the array 
@@ -75,7 +75,7 @@ void Map::DrawMap(Camera* camera) {
 	 */
 	
 	if (camera -> viewCulling) {
-		xMax = abs(camera -> CalculateCamX(windowW+tileSize)/tileSize);
+		xMax = abs(camera -> CalculateCamX(windowW+(tileSize))/tileSize);
 		xMax = xMax - (((xMax - 25)+abs(xMax - 25))/2);
 		xMin = (camera -> CalculateCamX(-tileSize)/tileSize);
 		xMin = (xMin + abs(xMin))/2;
