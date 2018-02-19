@@ -12,13 +12,11 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "GameObject.hpp"
-
-//class GameObject;
-
+#include "Window.hpp"
 
 class Camera {
 public:
-	Camera(double x, double y);
+	Camera(double x, double y, Window* window);
 	~Camera();
 	
 	
@@ -34,7 +32,7 @@ public:
 	void zoom(double zoom) {scale = zoom;};
 	void followObject(GameObject* object);
 	
-	void update();
+	void update(Window* window);
 	
 	double getX() {return xPos;};
 	double getY() {return yPos;};
@@ -43,6 +41,7 @@ public:
 	
 	bool viewCulling = true;
 	bool cullCheck(int X, int Y);
+	
 	
 private:
 	
@@ -61,6 +60,9 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
+	Window* window;
+	double windowWidth;
+	double windowHeight;
 	
 	double scale = 1.0;
 	

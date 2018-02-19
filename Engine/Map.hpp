@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Engine.hpp"
 #include "Camera.hpp"
+#include "Window.hpp"
 
 class Map {
 
@@ -24,7 +25,7 @@ public:
 	~Map();
 	
 	void LoadMap(int arr[20][25]);
-	void DrawMap(Camera* camera);
+	void DrawMap(Camera* camera, Window* window);
 	
 	
 private:
