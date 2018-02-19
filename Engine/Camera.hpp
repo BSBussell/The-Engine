@@ -34,19 +34,35 @@ public:
 	void zoom(double zoom) {scale = zoom;};
 	void followObject(GameObject* object);
 	
+	void update();
+	
 	double getX() {return xPos;};
 	double getY() {return yPos;};
+	double getCenterX() {return xPos+375;};
+	double getCenterY() {return yPos+375;};
 	
+	bool viewCulling = true;
 	bool cullCheck(int X, int Y);
 	
 private:
 	
 	bool follow = true;
-	bool viewCulling = false;
+	
 	
 	double xPos;
 	double yPos;
-	double scale = 1;
+	
+	double xGoal;
+	double yGoal;
+	
+	double xVel = 0.0;
+	double yVel = 0.0;
+	
+	double maxSpeed = 25;
+	double friction = 0.05;
+	
+	
+	double scale = 1.0;
 	
 	void moveTo(double x, double y, double lerp);
 };

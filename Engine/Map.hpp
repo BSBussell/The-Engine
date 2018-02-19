@@ -17,6 +17,9 @@ class Map {
 
 public:
 	
+	/*!
+	 * @discussion The Tile Map to be used
+	 */
 	Map();
 	~Map();
 	
@@ -33,6 +36,7 @@ private:
 	SDL_Texture* water;
 
 	int map[20][25];
+	int tileSize = 128;
 };
 
 #endif /* Map_hpp */

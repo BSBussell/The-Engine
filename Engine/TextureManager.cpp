@@ -23,7 +23,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, Camera* camera) {
 	
 	dest = camera -> CalculateToCamera(dest);
-	if (camera -> cullCheck(dest.x, dest.y)) {
+	if (camera -> cullCheck(dest.x, dest.y) || !camera -> viewCulling) {
 		SDL_RenderCopy(Engine::renderer, tex, &src, &dest);
 	}
 }

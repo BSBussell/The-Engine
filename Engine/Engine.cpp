@@ -63,6 +63,7 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	
 	camera = new Camera(0,0);
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 250, 250, 20);
+	
 	map = new Map();
 	
 	//camera -> zoom(2);
@@ -89,6 +90,7 @@ void Engine::update() {
 	
 	player -> update();
 	camera -> followObject(player -> player);
+	camera -> update();
 }
 
 void Engine::render() {

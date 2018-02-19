@@ -1,7 +1,7 @@
 //
 //  Map.cpp
 //  Engine
-//  Ignorethis.git
+//
 //  Created by Benjamin Bussell on 2/11/18.
 //  Copyright © 2018 Benjamin Bussell. All rights reserved.
 //
@@ -43,8 +43,8 @@ Map::Map() {
 
 	src.x = dest.x =  0;
 	src.y = dest.y =  0;
-	src.w = dest.w = 128;
-	src.h = dest.h = 128;
+	src.w = dest.w = tileSize;
+	src.h = dest.h = tileSize;
 }
 
 void Map::LoadMap(int arr[20][25]) {
@@ -60,20 +60,38 @@ void Map::LoadMap(int arr[20][25]) {
 void Map::DrawMap(Camera* camera) {
 	
 	int type = 0;
+	int xMax = 25;
+	int xMin = 0;
+	int yMax = 20;
+	int yMin = 0;
+	int windowW = 800;
+	int windowH = 640;
 	
-	int xMax = abs(camera -> CalculateCamX(928)/128);
-	int xMin = (camera -> CalculateCamX(-128)/128);
-	int yMax = abs(camera -> CalculateCamY(768)/128);
-	int yMin = (camera -> CalculateCamY(-128)/128);
+	/*
+		Calculates the lowest and highest values of the array 
+		that will be visible on screen if drawn
+		Also use absolute value math to ensure that the number
+		is within the array
+	 */
 	
+	if (camera -> viewCulling) {
+		xMax = abs(camera -> CalculateCamX(windowW+tileSize)/tileSize);
+		xMax = xMax - (((xMax - 25)+abs(xMax - 25))/2);
+		xMin = (camera -> CalculateCamX(-tileSize)/tileSize);
+		xMin = (xMin + abs(xMin))/2;
+		yMax = abs(camera -> CalculateCamY(windowH+tileSize)/tileSize);
+		yMax = yMax - (((yMax - 20)+abs(yMax - 20))/2);
+		yMin = (camera -> CalculateCamY(-tileSize)/tileSize);
+		yMin = (yMin + abs(yMin))/2;
+	}
 	
 	for (int row = yMin; row < yMax; row++) {
 		for (int column = xMin; column < xMax; column++) {
 			
 			
 			type = map[row][column];
-			dest.x = column * 128;
-			dest.y = row * 128;
+			dest.x = column * tileSize;
+			dest.y = row * tileSize;
 
 			switch(type) {
 				case 0:

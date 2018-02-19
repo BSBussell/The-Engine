@@ -8,6 +8,7 @@
 
 #include "Player.hpp"
 
+
 Player::Player(const char* source, double x, double y, int speedLmt = 20) {
 	
 	player = new GameObject(source, "Player", x, y);
@@ -43,8 +44,8 @@ void Player::update() {
 	player -> moveXBy(dx);
 	player -> moveYBy(dy);
 	
-	player -> moveXBy(dx);
-	player -> moveYBy(dy);
+	//player -> moveXBy(dx);
+	//player -> moveYBy(dy);
 	
 	player -> update();
 }

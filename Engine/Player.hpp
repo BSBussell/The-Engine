@@ -31,7 +31,7 @@ public:
 	
 	bool active;
 	
-	int Speed = 30;
+	int Speed = 60;
 	double friction = 0.98;
 	
 	void events(SDL_Keycode event);
