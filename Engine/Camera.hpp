@@ -60,6 +60,11 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
+	double xBound = 0.0;
+	double yBound = 0.0;
+	double wBound = 2205;
+	double hBound = 1928;
+	
 	Window* window;
 	double windowWidth;
 	double windowHeight;

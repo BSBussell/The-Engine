@@ -33,8 +33,22 @@ void Camera::update(Window* wind) {
 	xVel = (xGoal - xPos)*friction;
 	yVel = (yGoal - yPos)*friction;
 	
+	
+	if ( xPos + xVel > xBound || xPos + xVel < -wBound) {
+		xVel = 0;
+	}
+	
+	if ( yPos + yVel > yBound || yPos + yVel < -hBound) {
+		yVel = 0;
+	}
 	xPos += xVel;
 	yPos += yVel;
+	
+	std::cout << "xPos: " << xPos+xVel << std::endl;
+	std::cout << "Width Bound: " << wBound << std::endl;
+	std::cout << "yPos: " << yPos+yVel << std::endl;
+	
+	
 	
 	
 	window = wind;
