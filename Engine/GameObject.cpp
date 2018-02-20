@@ -10,12 +10,18 @@
 #include "TextureManager.hpp"
 
 
-GameObject::GameObject(const char* textureSheet, const char* Name, double x, double y) {
+GameObject::GameObject(const char* textureSheet, const char* Name, double x, double y, double width = 200, double height = 200, physicsEngine* world = nullptr) {
 	
 	objTexture = TextureManager::LoadTexture(textureSheet);
 	
 	xPos = x;
 	yPos = y;
+	objWidth = width;
+	objHeight = height;
+	
+	world -> addRectObject(destRect);
+	localWorld = world;
+	
 	ID = Name;
 }
 
@@ -25,9 +31,9 @@ GameObject::~GameObject() {
 
 
 
-void GameObject::update() {
+void GameObject::update(physicsEngine* world) {
 
-	
+
 	srcRect.h  = 200;
 	srcRect.w  = 200;
 	srcRect.x  =  0;
@@ -37,6 +43,8 @@ void GameObject::update() {
 	destRect.y = yPos;
 	destRect.w = srcRect.w / 4;
 	destRect.h = srcRect.h / 4;
+	
+	localWorld = world;
 }
 
 void GameObject::render(Camera* camera) {
@@ -45,9 +53,15 @@ void GameObject::render(Camera* camera) {
 }
 
 void GameObject::moveXBy(double x) {
+	if (!localWorld -> checkAllCollision(destRect)) {
+		x *= -0.25;
+	}
 	xPos += x;
 }
 void GameObject::moveYBy(double y) {
+	if (!localWorld -> checkAllCollision(destRect)) {
+		//y *= -0.25;
+	}
 	yPos += y;
 }
 

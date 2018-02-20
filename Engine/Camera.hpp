@@ -57,6 +57,7 @@ private:
 	
 	double xPos;
 	double yPos;
+	double scale = 1;
 	
 	double xGoal;
 	double yGoal;
@@ -67,16 +68,16 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
-	int xBound;
-	int yBound;
-	int wBound;
-	int hBound;
+	int xBound = -500;
+	int yBound = -500;
+	int wBound = 1000;
+	int hBound = 1000;
 	
 	Window* window;
 	double windowWidth;
 	double windowHeight;
 	
-	double scale = 1.0;
+	
 	
 	void moveTo(double x, double y, double lerp);
 };

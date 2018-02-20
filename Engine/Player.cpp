@@ -9,9 +9,9 @@
 #include "Player.hpp"
 
 
-Player::Player(const char* source, double x, double y, int speedLmt = 20) {
+Player::Player(const char* source, double x, double y, int speedLmt = 20, physicsEngine* world = nullptr) {
 	
-	player = new GameObject(source, "Player", x, y);
+	player = new GameObject(source, "Player", x, y, 200,200, world);
 	Speed = speedLmt;
 	std::cout << "Player Initalized. . ." << std::endl;
 }
@@ -36,18 +36,25 @@ void Player::events(SDL_Keycode event) {
 			dy++;
 }
 
-void Player::update() {
+void Player::update(physicsEngine* world) {
 	
 	dx *= friction;
 	dy *= friction;
 	
+	double x = player -> getX();
+	double y = player -> getY();
+	
+	
+	if (x+dx <=0 ) {
+		dx =dx* -0.25;
+	}
+	if (y+dy <=0 ) {
+		dy =dy* -0.25;
+	}
 	player -> moveXBy(dx);
 	player -> moveYBy(dy);
-	
-	//player -> moveXBy(dx);
-	//player -> moveYBy(dy);
-	
-	player -> update();
+
+	player -> update(world);
 }
 
 void Player::render(Camera* camera) {

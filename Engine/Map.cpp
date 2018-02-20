@@ -33,13 +33,13 @@ int lvl1[20][25] = {
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 
-Map::Map() {
+Map::Map(physicsEngine* world) {
 
 	dirt = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/brownsquare.png");
 	grass = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/greensquare.jpg");
 	water = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/bluesquare.png");
 
-	LoadMap(lvl1);
+	LoadMap(lvl1, world);
 
 	src.x = dest.x =  0;
 	src.y = dest.y =  0;
@@ -47,11 +47,16 @@ Map::Map() {
 	src.h = dest.h = tileSize;
 }
 
-void Map::LoadMap(int arr[20][25]) {
+void Map::LoadMap(int arr[20][25], physicsEngine* world) {
 
 	for (int row = 0; row < 20; row++) {
 		for (int column = 0; column < 25; column++) {
 			map[row][column] = arr[row][column];
+			dest.x = column * tileSize;
+			dest.y = row * tileSize;
+			if (map[row][column] == 0) {
+				world -> addRectObject(dest);
+			}
 		}
 	}
 }
@@ -66,6 +71,8 @@ void Map::DrawMap(Camera* camera, Window* window) {
 	int yMin = 0;
 	int windowW = window -> getWidth();
 	int windowH = window -> getHeight();
+	
+	//tileSize = -129;
 	
 	/*
 		Calculates the lowest and highest values of the array 
@@ -84,14 +91,14 @@ void Map::DrawMap(Camera* camera, Window* window) {
 		yMin = (camera -> CalculateCamY(-tileSize)/tileSize);
 		yMin = (yMin + abs(yMin))/2;
 	}
-	
+	//tileSize = 128;
 	for (int row = yMin; row < yMax; row++) {
 		for (int column = xMin; column < xMax; column++) {
 			
 			
 			type = map[row][column];
-			dest.x = column * tileSize;
-			dest.y = row * tileSize;
+			dest.x = (column * tileSize);
+			dest.y = (row * tileSize);
 
 			switch(type) {
 				case 0:

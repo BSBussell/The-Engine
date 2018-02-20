@@ -21,10 +21,14 @@ Camera::~Camera() {
 
 SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	
-	dest.x += xPos;
-	dest.y += yPos;
-	dest.h = dest.h * scale;
-	dest.w = dest.w * scale;
+	dest.x += int(xPos);
+	dest.x *= scale;
+	dest.y += int(yPos);
+	dest.y *= scale;
+	dest.h += 5+scale;
+	dest.h *= scale;
+	dest.w += 5+scale;
+	dest.w *= scale;
 	return dest;
 }
 
@@ -33,13 +37,12 @@ void Camera::update(Window* wind) {
 	xVel = (xGoal - xPos)*friction;
 	yVel = (yGoal - yPos)*friction;
 	
-	
 	if ( xPos + xVel > xBound || xPos + xVel < -wBound) {
-		xVel = 0;
+	//	xVel = 0;
 	}
 	
 	if ( yPos + yVel > yBound || yPos + yVel < -hBound) {
-		yVel = 0;
+	//	yVel = 0;
 	}
 	xPos += xVel;
 	yPos += yVel;

@@ -13,18 +13,19 @@
 #include "Engine.hpp"
 #include "Camera.hpp"
 #include "Window.hpp"
+#include "physicsEngine.hpp"
 
 class Map {
 
 public:
 	
 	/*!
-	 * @discussion The Tile Map to be used
+	 * @discussion The Tile Map to be used with drawing and crap
 	 */
-	Map();
+	Map(physicsEngine* world);
 	~Map();
 	
-	void LoadMap(int arr[20][25]);
+	void LoadMap(int arr[20][25],physicsEngine* world);
 	void DrawMap(Camera* camera, Window* window);
 	
 	
