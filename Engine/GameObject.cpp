@@ -19,7 +19,9 @@ GameObject::GameObject(const char* textureSheet, const char* Name, double x, dou
 	objWidth = width;
 	objHeight = height;
 	
-	world -> addRectObject(destRect);
+	object = new physicsObject(x,y,width,height);
+	
+	
 	localWorld = world;
 	
 	ID = Name;
@@ -53,16 +55,12 @@ void GameObject::render(Camera* camera) {
 }
 
 void GameObject::moveXBy(double x) {
-	if (!localWorld -> checkAllCollision(destRect)) {
-		x *= -0.25;
-	}
-	xPos += x;
+	
+	xPos = object->moveX(x);
 }
 void GameObject::moveYBy(double y) {
-	if (!localWorld -> checkAllCollision(destRect)) {
-		//y *= -0.25;
-	}
-	yPos += y;
+	
+	yPos = object->moveY(y);
 }
 
 

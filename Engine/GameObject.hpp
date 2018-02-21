@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "physicsEngine.hpp"
+//#include "physicsEngine.hpp"
 //#include "Camera.hpp"
 class Camera;
 
@@ -51,6 +51,7 @@ private:
 	double objHeight;
 	
 	physicsEngine* localWorld;
+	physicsObject* object;
 	
 	SDL_Texture* objTexture;
 	

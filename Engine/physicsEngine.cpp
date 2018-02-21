@@ -8,6 +8,8 @@
 
 #include "physicsEngine.hpp"
 
+//using namespace physicsEngine;
+
 physicsEngine::physicsEngine() {
 	
 }
@@ -15,54 +17,38 @@ physicsEngine::~physicsEngine() {
 	
 }
 
-void physicsEngine::addRectObject(SDL_Rect rect) {
-	
-	objects.push_back(rect);
-}
 
 void physicsEngine::update() {
-	
-}
-
-bool physicsEngine::checkAllCollision(SDL_Rect rect) {
-	for(int i=0; i < objects.size(); i++){
-		
-		if (checkCollision(rect, objects[i])) {
-			return false;
+	int a = 0;
+	for (auto &i : objects) {
+		if (!Camera::cullCheck(i.dest.x,i.dest.y)) {
+			inActiveObjects.push_back(i);
+			objects.erase(objects.begin()+a);
 		}
+		
 	}
-	return true;
 }
 
-bool physicsEngine::checkCollision(SDL_Rect rectA, SDL_Rect rectB) {
-	
-	int leftA, leftB;
-	int rightA, rightB;
-	int topA, topB;
-	int bottomA, bottomB;
 
-	leftA = rectA.x;
-	rightA = rectA.x + rectA.w;
-	topA = rectA.y;
-	bottomA = rectA.y + rectA.h;
+physicsObject::physicsObject(double x, double y, double w, double h) {
 	
-	leftB = rectB.x;
-	rightB = rectB.x + rectB.w;
-	topB = rectB.y;
-	bottomB = rectB.y + rectB.h;
+	dest.x = x;
+	dest.y = y;
+	dest.w = w;
+	dest.h = h;
 	
-	if( bottomA <= topB ) {
-		return false;
-	}
-	if( topA >= bottomB ) {
-		return false;
-	}
-	if( rightA <= leftB ) {
-		return false;
-	}
-	if( leftA >= rightB ) {
-		return false;
-	}
+}
+physicsObject::~physicsObject() {
 	
-	return true;
+}
+double physicsObject::moveX(double x) {
+	
+	dest.x += x;
+	
+	return dest.x;
+}
+double physicsObject::moveY(double y) {
+	
+	dest.y += y;
+	return dest.y;
 }

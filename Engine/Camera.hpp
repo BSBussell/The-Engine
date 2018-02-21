@@ -14,6 +14,8 @@
 #include "GameObject.hpp"
 #include "Window.hpp"
 
+//class GameObject;
+
 class Camera {
 public:
 	Camera(double x, double y, Window* window);
@@ -47,7 +49,7 @@ public:
 	};
 	
 	bool viewCulling = true;
-	bool cullCheck(int X, int Y);
+	static bool cullCheck(int X, int Y);
 	
 	
 private:
@@ -74,8 +76,8 @@ private:
 	int hBound = 1000;
 	
 	Window* window;
-	double windowWidth;
-	double windowHeight;
+	static double windowWidth;
+	static double windowHeight;
 	
 	
 	

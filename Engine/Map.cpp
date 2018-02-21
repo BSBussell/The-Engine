@@ -54,8 +54,11 @@ void Map::LoadMap(int arr[20][25], physicsEngine* world) {
 			map[row][column] = arr[row][column];
 			dest.x = column * tileSize;
 			dest.y = row * tileSize;
+			tile = new physicsObject(int (row*tileSize),int (column*tileSize), tileSize,tileSize);
 			if (map[row][column] == 0) {
-				world -> addRectObject(dest);
+				tile -> collidable = true;
+			} else {
+				tile-> collidable = false;
 			}
 		}
 	}

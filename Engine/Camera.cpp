@@ -38,11 +38,11 @@ void Camera::update(Window* wind) {
 	yVel = (yGoal - yPos)*friction;
 	
 	if ( xPos + xVel > xBound || xPos + xVel < -wBound) {
-	//	xVel = 0;
+		xVel = 0;
 	}
 	
 	if ( yPos + yVel > yBound || yPos + yVel < -hBound) {
-	//	yVel = 0;
+		yVel = 0;
 	}
 	xPos += xVel;
 	yPos += yVel;
@@ -85,7 +85,7 @@ void Camera::moveTo(double X, double Y, double lerp = 1.0) {
 
 bool Camera::cullCheck(int X, int Y) {
 	
-	if (X < -128 || X > (windowWidth*1.15) || Y < -128 || Y > (windowHeight*1.15)) {
+	if (X < -128 || X > (/*windowWidth*/1000*1.15) || Y < -128 || Y > (/*windowHeight*/600*1.15)) {
 		return false;
 	} else {
 		return true;
