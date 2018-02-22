@@ -29,8 +29,6 @@ public:
 	void render();
 	void clean();
 	
-	Camera* camera;
-	
 	bool running()  { return isRunning; }
 	
 	static SDL_Renderer *renderer;

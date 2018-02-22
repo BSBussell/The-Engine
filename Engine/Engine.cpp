@@ -52,7 +52,7 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	
 	map = new Map(world,camera,window);
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world, camera);
-	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world);
+	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world, camera);
 	
 	camera -> followObject(player -> player);
 	
@@ -90,7 +90,7 @@ void Engine::render() {
 	
 	map -> DrawMap();
 	player -> render();
-	object -> render(camera);
+	object -> render();
 	
 	SDL_RenderPresent(renderer);
 }

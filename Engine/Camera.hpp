@@ -11,8 +11,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "GameObject.hpp"
+
 #include "Window.hpp"
+#include "GameObject.hpp"
+
 
 class GameObject;
 

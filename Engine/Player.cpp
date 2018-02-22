@@ -11,10 +11,8 @@
 
 Player::Player(const char* source, double x, double y, int speedLmt = 20, physicsEngine* world = nullptr, Camera* camera = nullptr) {
 	
-	player = new GameObject(source, "Player", x, y, 200,200, world);
-	
-	local_World = world;
-	local_Camera = camera;
+	player = new GameObject(source, "Player", x, y, 200,200, world, camera);
+	//local_World = world;
 	
 	Speed = speedLmt;
 	std::cout << "Player Initalized. . ." << std::endl;
@@ -63,5 +61,5 @@ void Player::update() {
 
 void Player::render() {
 	
-	player -> render(local_Camera);
+	player -> render();
 }

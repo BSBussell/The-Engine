@@ -7,6 +7,7 @@
 //
 
 #include "Camera.hpp"
+
 #include "TextureManager.hpp"
 #include "Window.hpp"
 

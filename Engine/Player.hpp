@@ -10,9 +10,10 @@
 #define Player_hpp
 
 #include <stdio.h>
-#include "GameObject.hpp"
+
 #include "Camera.hpp"
 #include "physicsEngine.hpp"
+#include "GameObject.hpp"
 
 class Player {
 	
@@ -46,9 +47,6 @@ protected:
 	
 
 private:
-	
-	physicsEngine* local_World;
-	Camera* local_Camera;
 	
 	double dx = 0;
 	double dy = 0;

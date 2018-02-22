@@ -41,48 +41,7 @@ void physicsEngine::draw() {
 }
 
 void physicsEngine::update() {
-	//int a = 0;
-	/*for (auto &i : inActiveObjects) {
-		SDL_Rect newRect;
-		newRect = camera -> CalculateToCamera(i.dest);
-		if (Camera::cullCheck(newRect.x,newRect.y)) {
-			i.id = int(objects.size());
-			std::cout << i.id << std::endl;
-			objects.push_back(i);
-			inActiveObjects.erase(inActiveObjects.begin()+a);
-			a--;
-		} else {
-			
-		}
-		a++;
-	}
-	for (auto &i : objects) {
-		SDL_Rect newRect;
-		newRect = camera -> CalculateToCamera(i.dest);
-		if (!Camera::cullCheck(newRect.x,newRect.y)) {
-				//i.id = int(inActiveObjects.size()+1);
-				inActiveObjects.push_back(i);
-				//std::cout << "I: " << i.dest.x << std::endl;
-				//std::cout << "OBJ: " << objects[a].dest.x << std::endl;
-				objects.erase(objects.begin()+a);
-			
-			
-				a--;
-			
-			
-		} else {
-			//i.id = a;
-			
-		}
-		a++;
-		//std::cout << i.id << std::endl;
-		
-		
-	}
-	a = 0;*/
 	
-	
-	//objects[501].collidable = true;
 }
 
 void physicsEngine::addObject(physicsObject newObj) {

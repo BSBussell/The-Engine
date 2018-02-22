@@ -50,5 +50,7 @@ int main( int argc, char* args[] ) {
 
 	engine -> clean();
 
+	delete engine;
+	
 	return 0;
 }

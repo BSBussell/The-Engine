@@ -9,8 +9,9 @@
 #include "GameObject.hpp"
 #include "TextureManager.hpp"
 
+class Camera;
 
-GameObject::GameObject(const char* textureSheet, const char* Name, double x, double y, double width = 200, double height = 200, physicsEngine* world = nullptr) {
+GameObject::GameObject(const char* textureSheet, const char* Name, double x, double y, double width = 200, double height = 200, physicsEngine* world = nullptr, Camera* camera = nullptr) {
 	
 	objTexture = TextureManager::LoadTexture(textureSheet);
 	
@@ -33,7 +34,7 @@ GameObject::GameObject(const char* textureSheet, const char* Name, double x, dou
 	object -> collidable = true;
 	object -> updateProperties();
 	
-	
+	localCamera = camera;
 	localWorld = world;
 	
 	ID = Name;
@@ -62,9 +63,9 @@ void GameObject::update() {
 	//localWorld = world;
 }
 
-void GameObject::render(Camera* camera) {
+void GameObject::render() {
 
-	TextureManager::Draw(objTexture, srcRect, destRect, camera);
+	TextureManager::Draw(objTexture, srcRect, destRect, localCamera);
 }
 
 void GameObject::moveXBy(double x) {
