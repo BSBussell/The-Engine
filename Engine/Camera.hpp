@@ -34,7 +34,7 @@ public:
 	void zoom(double zoom) {scale = zoom;};
 	void followObject(GameObject* object);
 	
-	void update(Window* window);
+	void update();
 	
 	double getX() {return xPos;};
 	double getY() {return yPos;};

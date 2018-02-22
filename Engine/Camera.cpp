@@ -35,7 +35,13 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	return dest;
 }
 
-void Camera::update(Window* wind) {
+void Camera::update() {
+	
+	if (ObjectToFollow) {
+		xGoal = ObjectToFollow -> getX();
+		yGoal = ObjectToFollow -> getY();
+		moveTo(xGoal, yGoal, 1);
+	}
 	
 	xVel = (xGoal - xPos)*friction;
 	yVel = (yGoal - yPos)*friction;
@@ -73,11 +79,11 @@ void Camera::moveYBy(double y) {
 
 void Camera::followObject(GameObject *object) {
 	
-	objectX = object -> getX();
-	objectY = object -> getY();
+	ObjectToFollow = object;
 	
 	
-	moveTo(objectX,objectY,1.0);
+	
+	//moveTo(objectX,objectY,1.0);
 }
 
 void Camera::moveTo(double X, double Y, double lerp = 1.0) {

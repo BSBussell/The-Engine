@@ -53,20 +53,18 @@ class physicsEngine {
 	
 public:
 	
-	physicsEngine();
+	physicsEngine(Camera* camera);
 	~physicsEngine();
 	
 	
-	
-	void draw(Camera* camera);
+	void update();
+	void draw();
 	
 	//static bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);
 	bool checkAllCollision(SDL_Rect rect, int id);
 	
 	
 	void addObject(physicsObject newObject);
-	
-	void update(Camera* camera);
 	std::vector<physicsObject> objects;
 	
 protected:
@@ -74,6 +72,8 @@ protected:
 	
 	
 private:
+	
+	Camera* localCamera;
 	
 	std::vector<physicsObject> inActiveObjects;
 	

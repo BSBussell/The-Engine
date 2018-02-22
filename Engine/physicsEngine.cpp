@@ -11,8 +11,9 @@
 int physicsObject::counter;
 //using namespace physicsEngine;
 
-physicsEngine::physicsEngine() {
+physicsEngine::physicsEngine(Camera* camera) {
 	
+	localCamera = camera;
 }
 physicsEngine::~physicsEngine() {
 	
@@ -28,18 +29,18 @@ bool physicsEngine::checkAllCollision(SDL_Rect rect, int id) {
 	return true;
 }
 
-void physicsEngine::draw(Camera* camera) {
+void physicsEngine::draw() {
 	for (auto &i : objects) {
 		if (i.collidable == 1){
-			TextureManager::DrawRect(i.dest, camera,255,0,0);
+			TextureManager::DrawRect(i.dest, localCamera,255,0,0);
 		} else {
-			TextureManager::DrawRect(i.dest, camera,255,255,255);
+			TextureManager::DrawRect(i.dest, localCamera,255,255,255);
 		}
 		//std::cout << i.collidable << std::endl;
 	}
 }
 
-void physicsEngine::update(Camera* camera) {
+void physicsEngine::update() {
 	//int a = 0;
 	/*for (auto &i : inActiveObjects) {
 		SDL_Rect newRect;
@@ -107,6 +108,7 @@ double physicsObject::moveX(double x) {
 	SDL_Rect testCase = dest;
 	testCase.x += x;
 	bool colCheck = localWorld -> checkAllCollision(testCase, id);
+	
 	if (colCheck) {
 		dest.x += x;
 	}
@@ -119,6 +121,7 @@ double physicsObject::moveY(double y) {
 	SDL_Rect testCase = dest;
 	testCase.y += y;
 	bool colCheck = localWorld -> checkAllCollision(testCase, id);
+	
 	if (colCheck) {
 		dest.y += y;
 	}
