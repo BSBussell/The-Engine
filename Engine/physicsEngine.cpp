@@ -17,38 +17,88 @@ physicsEngine::~physicsEngine() {
 	
 }
 
-
-void physicsEngine::update() {
-	int a = 0;
+bool physicsEngine::checkAllCollision(SDL_Rect rect) {
 	for (auto &i : objects) {
-		if (!Camera::cullCheck(i.dest.x,i.dest.y)) {
-			inActiveObjects.push_back(i);
-			objects.erase(objects.begin()+a);
+		if (SDL_HasIntersection(&rect, &i.dest) && i.collidable) {
+			std::cout << "Collision" << std::endl;
+			return false;
 		}
-		
+	}
+	return true;
+}
+
+void physicsEngine::draw(Camera* camera) {
+	for (auto &i : objects) {
+		if (i.collidable){
+				TextureManager::DrawRect(i.dest, camera,255,0,0);
+		} else {
+			TextureManager::DrawRect(i.dest, camera,255,255,255);
+		}
 	}
 }
 
+void physicsEngine::update(Camera* camera) {
+	int a = 0;
+	for (auto &i : objects) {
+		SDL_Rect newRect;
+		newRect = camera -> CalculateToCamera(i.dest);
+		if (!Camera::cullCheck(newRect.x,newRect.y)) {
+				inActiveObjects.push_back(i);
+				objects.erase(objects.begin()+a);
+				//std::cout << i.dest.x << std::endl;
+		}
+		a++;
+		
+	}
+	a = 0;
+	for (auto &i : inActiveObjects) {
+		SDL_Rect newRect;
+		newRect = camera -> CalculateToCamera(i.dest);
+		if (Camera::cullCheck(newRect.x,newRect.y)) {
+			objects.push_back(i);
+			inActiveObjects.erase(objects.begin()+a);
+		}
+		a++;
+	}
+}
 
-physicsObject::physicsObject(double x, double y, double w, double h) {
+void physicsEngine::addObject(physicsObject newObj) {
 	
-	dest.x = x;
-	dest.y = y;
-	dest.w = w;
-	dest.h = h;
+	objects.push_back(newObj);
+}
+
+
+physicsObject::physicsObject(SDL_Rect rect, physicsEngine &world) : localWorld(world) {
 	
+	dest = rect;
+	//localWorld = world;
+	localWorld.addObject(*this);
+	//world -> addObject(*this);
 }
 physicsObject::~physicsObject() {
 	
 }
 double physicsObject::moveX(double x) {
 	
-	dest.x += x;
+	
+	if (localWorld . checkAllCollision(dest)) {
+		dest.x += x;
+	} else {
+		x*= -0.25;
+		dest.x += x;
+	}
 	
 	return dest.x;
 }
 double physicsObject::moveY(double y) {
 	
-	dest.y += y;
+	
+	if (localWorld . checkAllCollision(dest)) {
+		dest.y += y;
+	} else {
+		y*= -0.25;
+		dest.y += y;
+	}
+	//dest.y += y;
 	return dest.y;
 }

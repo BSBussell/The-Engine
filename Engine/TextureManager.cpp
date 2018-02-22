@@ -20,6 +20,13 @@ SDL_Texture* TextureManager::LoadTexture(const char* texture) {
 	return tex;
 }
 
+void TextureManager::DrawRect(SDL_Rect rect,Camera *camera,Uint8 r=255,Uint8 g=255,Uint8 b=255) {
+	rect = camera -> CalculateToCamera(rect);
+	SDL_SetRenderDrawColor(Engine::renderer, r, g, b, 255);
+	
+	SDL_RenderDrawRect(Engine::renderer, &rect);
+}
+
 void TextureManager::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, Camera* camera) {
 	
 	dest = camera -> CalculateToCamera(dest);

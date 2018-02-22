@@ -18,6 +18,7 @@ class TextureManager {
 public:
 	
 	static SDL_Texture* LoadTexture(const char*fileName);
+	static void DrawRect(SDL_Rect rect,Camera* camera,Uint8 r,Uint8 g,Uint8 b);
 	static void Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest, Camera* camera);
 
 };

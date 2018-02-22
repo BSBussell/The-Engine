@@ -10,10 +10,13 @@
 #include "TextureManager.hpp"
 #include "Window.hpp"
 
-Camera::Camera(double x, double y, Window* window) {
+Window* Camera::window = nullptr;
+
+Camera::Camera(double x, double y, Window* newwindow) {
 	
 	xPos = x;
 	yPos = y;
+	window = newwindow;
 }
 Camera::~Camera() {
 	
@@ -47,9 +50,9 @@ void Camera::update(Window* wind) {
 	xPos += xVel;
 	yPos += yVel;
 	
-	window = wind;
-	windowWidth = wind -> getWidth();
-	windowHeight = wind -> getHeight();
+	//window = wind;
+	windowWidth = window -> getWidth();
+	windowHeight = window -> getHeight();
 }
 
 void Camera::moveXBy(double x) {
@@ -85,7 +88,10 @@ void Camera::moveTo(double X, double Y, double lerp = 1.0) {
 
 bool Camera::cullCheck(int X, int Y) {
 	
-	if (X < -128 || X > (/*windowWidth*/1000*1.15) || Y < -128 || Y > (/*windowHeight*/600*1.15)) {
+	int width = window -> getWidth();
+	int height = window -> getHeight();
+	
+	if (X < -128 || X > (width*1.15) || Y < -128 || Y > (height*1.15)) {
 		return false;
 	} else {
 		return true;

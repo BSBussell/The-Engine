@@ -16,25 +16,31 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 #include "Camera.hpp"
+#include "TextureManager.hpp"
+
+
+class physicsEngine;
+class physicsObject;
 
 class physicsObject {
 	
 public:
-	physicsObject(double x, double y, double w, double h);
+	physicsObject(SDL_Rect rect, physicsEngine &world);
 	~physicsObject();
 	
 	
 	double moveX(double x);
 	double moveY(double y);
 	
-	bool collidable = true;
+	bool collidable;
 	
 	SDL_Rect dest;
 	
-protected:
+
 	
+private :
 	
-	
+	physicsEngine &localWorld;
 	
 	
 };
@@ -46,23 +52,24 @@ public:
 	physicsEngine();
 	~physicsEngine();
 	
-	
+	void draw(Camera* camera);
 	
 	//static bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);
-	//bool checkAllCollision(SDL_Rect rect);
-	
-	// Dude I don't even know what I'm doing anymore this might wind up a
-	// colossal disaster
+	bool checkAllCollision(SDL_Rect rect);
 	
 	
-	//physicsObject addRectObject();
+	void addObject(physicsObject newObject);
 	
-	void update();
+	void update(Camera* camera);
+	
+protected:
+	
+	
 	
 private:
-	
 	std::vector<physicsObject> objects;
 	std::vector<physicsObject> inActiveObjects;
+	
 	
 };
 
