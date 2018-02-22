@@ -14,7 +14,7 @@
 #include "GameObject.hpp"
 #include "Window.hpp"
 
-//class GameObject;
+class GameObject;
 
 class Camera {
 public:
@@ -75,9 +75,9 @@ private:
 	int wBound = 1000;
 	int hBound = 1000;
 	
-	Window* window;
-	static double windowWidth;
-	static double windowHeight;
+	static Window* window;
+	double windowWidth;
+	double windowHeight;
 	
 	
 	

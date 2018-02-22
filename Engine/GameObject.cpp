@@ -19,7 +19,17 @@ GameObject::GameObject(const char* textureSheet, const char* Name, double x, dou
 	objWidth = width;
 	objHeight = height;
 	
-	object = new physicsObject(x,y,width,height);
+	srcRect.h  = 200;
+	srcRect.w  = 200;
+	srcRect.x  =  0;
+	srcRect.y  =  0;
+	
+	destRect.x = xPos;
+	destRect.y = yPos;
+	destRect.w = srcRect.w / 4;
+	destRect.h = srcRect.h / 4;
+	
+	object = new physicsObject(destRect,*world);
 	
 	
 	localWorld = world;

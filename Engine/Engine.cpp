@@ -47,7 +47,7 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	camera = new Camera(0,0,window);
 	camera -> setCameraBounds(0, 0, 2205, 1928);
 	
-	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 250, 250, 20, world);
+	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world);
 	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world);
 	
 	
@@ -73,7 +73,7 @@ void Engine::handleEvents() {
 
 void Engine::update() {
 	
-	world -> update();
+	world -> update(camera);
 	player -> update(world);
 	object -> update(world);
 	
@@ -87,13 +87,22 @@ void Engine::render() {
 	map -> DrawMap(camera, window);
 	player -> render(camera);
 	object -> render(camera);
-	
+	world -> draw(camera);
 	SDL_RenderPresent(renderer);
 }
 
 void Engine::clean() {
 	
+	
+	
 	window -> clean();
+	
+	delete [] world;
+	delete [] camera;
+	delete [] player;
+	delete [] window;
+	delete [] object;
+	
 	SDL_Quit();
 	
 	std::cout << "Game Cleaned. . ." << std::endl;

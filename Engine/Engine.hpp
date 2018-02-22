@@ -13,8 +13,9 @@
 #include <SDL2_image/SDL_image.h>
 #include <stdio.h>
 #include <iostream>
-#include "Camera.hpp"
+//#include "Camera.hpp"
 
+class Camera;
 
 class Engine {
 	
