@@ -28,9 +28,9 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	dest.x *= scale;
 	dest.y += int(yPos);
 	dest.y *= scale;
-	dest.h += 5+scale;
+	//dest.h += 5+scale;
 	dest.h *= scale;
-	dest.w += 5+scale;
+	//dest.w += 5+scale;
 	dest.w *= scale;
 	return dest;
 }
@@ -73,8 +73,8 @@ void Camera::moveYBy(double y) {
 
 void Camera::followObject(GameObject *object) {
 	
-	double objectX = object -> getX();
-	double objectY = object -> getY();
+	objectX = object -> getX();
+	objectY = object -> getY();
 	
 	
 	moveTo(objectX,objectY,1.0);

@@ -32,7 +32,7 @@ public:
 	
 	
 	
-	void update(physicsEngine* world);
+	void update();
 	void render(Camera* camera);
 	
 	void moveXBy(double x);

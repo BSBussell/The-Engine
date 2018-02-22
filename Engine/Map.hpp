@@ -22,17 +22,20 @@ public:
 	/*!
 	 * @discussion The Tile Map to be used with drawing and crap
 	 */
-	Map(physicsEngine* world);
+	Map(physicsEngine* world, Camera* camera, Window* window);
 	~Map();
 	
-	void LoadMap(int arr[20][25],physicsEngine* world);
-	void DrawMap(Camera* camera, Window* window);
+	void LoadMap(int arr[20][25]);
+	void DrawMap();
 	
 	
 private:
 	
 	SDL_Rect src, dest;
 	
+	Window* localWindow;
+	Camera* localCamera;
+	physicsEngine* localWorld;
 	physicsObject* tile;
 	
 	SDL_Texture* dirt;

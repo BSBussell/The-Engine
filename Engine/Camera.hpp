@@ -70,6 +70,7 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
+	
 	int xBound = -500;
 	int yBound = -500;
 	int wBound = 1000;
@@ -79,7 +80,7 @@ private:
 	double windowWidth;
 	double windowHeight;
 	
-	
+	GameObject* ObjectToFollow;
 	
 	void moveTo(double x, double y, double lerp);
 };

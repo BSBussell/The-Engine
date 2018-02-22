@@ -29,7 +29,9 @@ GameObject::GameObject(const char* textureSheet, const char* Name, double x, dou
 	destRect.w = srcRect.w / 4;
 	destRect.h = srcRect.h / 4;
 	
-	object = new physicsObject(destRect,*world);
+	object = new physicsObject(destRect,world);
+	object -> collidable = true;
+	object -> updateProperties();
 	
 	
 	localWorld = world;
@@ -39,11 +41,12 @@ GameObject::GameObject(const char* textureSheet, const char* Name, double x, dou
 
 GameObject::~GameObject() {
 	
+	delete object;
 }
 
 
 
-void GameObject::update(physicsEngine* world) {
+void GameObject::update() {
 
 
 	srcRect.h  = 200;
@@ -56,7 +59,7 @@ void GameObject::update(physicsEngine* world) {
 	destRect.w = srcRect.w / 4;
 	destRect.h = srcRect.h / 4;
 	
-	localWorld = world;
+	//localWorld = world;
 }
 
 void GameObject::render(Camera* camera) {
@@ -65,8 +68,9 @@ void GameObject::render(Camera* camera) {
 }
 
 void GameObject::moveXBy(double x) {
-	
+	//x = 1;
 	xPos = object->moveX(x);
+	
 }
 void GameObject::moveYBy(double y) {
 	

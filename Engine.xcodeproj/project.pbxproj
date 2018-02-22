@@ -72,7 +72,6 @@
 		78416A72203B45AD002AAB9B /* Physics */ = {
 			isa = PBXGroup;
 			children = (
-				78976493203E05920023732F /* Forward  */,
 				78416A73203B45BA002AAB9B /* Scripts */,
 				78416A74203B45C1002AAB9B /* Headers */,
 			);
@@ -131,13 +130,6 @@
 				78552B22202FCDD9000C6620 /* SDL2.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		78976493203E05920023732F /* Forward  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Forward ";
 			sourceTree = "<group>";
 		};
 		78BEADEB203132A100E925F6 /* Scripts */ = {

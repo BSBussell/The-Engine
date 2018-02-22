@@ -25,7 +25,7 @@ public:
 	 * @param y The Inital Y position your character will spawn on
 	 * @param maxSpeed The maximum speed your player will be able to move
 	 */
-	Player(const char* textureSrc, double x, double y, int maxSpeed, physicsEngine* world);
+	Player(const char* textureSrc, double x, double y, int maxSpeed, physicsEngine* world, Camera* camera);
 	~Player();
 	
 	GameObject* player;
@@ -36,8 +36,8 @@ public:
 	double friction = 0.98;
 	
 	void events(SDL_Keycode event);
-	void update(physicsEngine* world);
-	void render(Camera* camera);
+	void update();
+	void render();
 	
 protected:
 	
@@ -46,6 +46,9 @@ protected:
 	
 
 private:
+	
+	physicsEngine* local_World;
+	Camera* local_Camera;
 	
 	double dx = 0;
 	double dy = 0;
