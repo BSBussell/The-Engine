@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7807FCC3202FDFBA000EEA96 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7807FCC1202FDFBA000EEA96 /* Engine.cpp */; };
 		7818DC4D203A9932004A7178 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7818DC4B203A9932004A7178 /* Window.cpp */; };
+		78416A77203B467F002AAB9B /* physicsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78416A75203B467F002AAB9B /* physicsEngine.cpp */; };
 		78552B15202FCA29000C6620 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78552B14202FCA29000C6620 /* main.cpp */; };
 		78552B23202FCDD9000C6620 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78552B22202FCDD9000C6620 /* SDL2.framework */; };
 		789B825C2034C04A007C08B4 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 789B825A2034C04A007C08B4 /* Camera.cpp */; };
@@ -36,6 +37,8 @@
 		7807FCC2202FDFBA000EEA96 /* Engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Engine.hpp; sourceTree = "<group>"; };
 		7818DC4B203A9932004A7178 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		7818DC4C203A9932004A7178 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
+		78416A75203B467F002AAB9B /* physicsEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physicsEngine.cpp; sourceTree = "<group>"; };
+		78416A76203B467F002AAB9B /* physicsEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = physicsEngine.hpp; sourceTree = "<group>"; };
 		78552B11202FCA29000C6620 /* Engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Engine; sourceTree = BUILT_PRODUCTS_DIR; };
 		78552B14202FCA29000C6620 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		78552B22202FCDD9000C6620 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 		78416A73203B45BA002AAB9B /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				78416A75203B467F002AAB9B /* physicsEngine.cpp */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -85,6 +89,7 @@
 		78416A74203B45C1002AAB9B /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				78416A76203B467F002AAB9B /* physicsEngine.hpp */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				789B825C2034C04A007C08B4 /* Camera.cpp in Sources */,
 				7818DC4D203A9932004A7178 /* Window.cpp in Sources */,
 				78BEADF2203224C400E925F6 /* Player.cpp in Sources */,
+				78416A77203B467F002AAB9B /* physicsEngine.cpp in Sources */,
 				7807FCC3202FDFBA000EEA96 /* Engine.cpp in Sources */,
 				78BEADE32031021700E925F6 /* GameObject.cpp in Sources */,
 				78BEADE72031134F00E925F6 /* TextureManager.cpp in Sources */,
@@ -327,6 +333,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -341,6 +348,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

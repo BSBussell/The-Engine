@@ -13,24 +13,30 @@
 #include "Engine.hpp"
 #include "Camera.hpp"
 #include "Window.hpp"
+#include "physicsEngine.hpp"
 
 class Map {
 
 public:
 	
 	/*!
-	 * @discussion The Tile Map to be used
+	 * @discussion The Tile Map to be used with drawing and crap
 	 */
-	Map();
+	Map(physicsEngine* world, Camera* camera, Window* window);
 	~Map();
 	
 	void LoadMap(int arr[20][25]);
-	void DrawMap(Camera* camera, Window* window);
+	void DrawMap();
 	
 	
 private:
 	
 	SDL_Rect src, dest;
+	
+	Window* localWindow;
+	Camera* localCamera;
+	physicsEngine* localWorld;
+	physicsObject* tile;
 	
 	SDL_Texture* dirt;
 	SDL_Texture* grass;

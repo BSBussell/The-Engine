@@ -12,8 +12,11 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "physicsEngine.hpp"
 //#include "Camera.hpp"
 class Camera;
+class physicsEngine;
+class physicsObject;
 
 class GameObject {
 public:
@@ -24,7 +27,7 @@ public:
 	 * @param x  A Double specifing the X Position of the Object on the Screen
 	 * @param y  A Double specifing the Y Position of the Object on the Screen
 	 */
-	GameObject(const char* textureSheet, const char* ID, double x, double y);
+	GameObject(const char* textureSheet, const char* ID, double x, double y, double width, double height, physicsEngine* world);
 	~GameObject();
 	
 	
@@ -38,6 +41,7 @@ public:
 	int getX() {return xPos;};
 	int getY() {return yPos;};
 	
+	SDL_Rect srcRect, destRect;
 	
 private:
 	
@@ -45,9 +49,16 @@ private:
 	
 	double xPos;
 	double yPos;
+	double objWidth;
+	double objHeight;
+	
+	physicsEngine* localWorld;
+	physicsObject* object;
 	
 	SDL_Texture* objTexture;
-	SDL_Rect srcRect, destRect;
+	
+
+	
 	SDL_Rect scrnRect;
 	
 	

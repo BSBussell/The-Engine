@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "GameObject.hpp"
 #include "Camera.hpp"
+#include "physicsEngine.hpp"
 
 class Player {
 	
@@ -24,7 +25,7 @@ public:
 	 * @param y The Inital Y position your character will spawn on
 	 * @param maxSpeed The maximum speed your player will be able to move
 	 */
-	Player(const char* textureSrc, double x, double y, int maxSpeed);
+	Player(const char* textureSrc, double x, double y, int maxSpeed, physicsEngine* world, Camera* camera);
 	~Player();
 	
 	GameObject* player;
@@ -36,7 +37,7 @@ public:
 	
 	void events(SDL_Keycode event);
 	void update();
-	void render(Camera* camera);
+	void render();
 	
 protected:
 	
@@ -45,6 +46,9 @@ protected:
 	
 
 private:
+	
+	physicsEngine* local_World;
+	Camera* local_Camera;
 	
 	double dx = 0;
 	double dy = 0;

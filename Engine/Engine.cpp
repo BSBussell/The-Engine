@@ -7,15 +7,20 @@
 //
 
 #include "Engine.hpp"
-#include "GameObject.hpp"
 #include "TextureManager.hpp"
+
+
 #include "Map.hpp"
+#include "GameObject.hpp"
 #include "Camera.hpp"
 #include "Player.hpp"
 #include "Window.hpp"
+#include "physicsEngine.hpp"
 
 Player* player;
+GameObject* object;
 Map* map;
+physicsEngine* world;
 Camera* camera;
 Window* window;
 
@@ -38,11 +43,16 @@ void Engine::init(const char *title, int xPos, int yPos, int width, int height, 
 	isRunning = window -> init(title, xPos, yPos, width, height, fullScreen);
 	renderer = window -> getRenderer();
 	
+	world = new physicsEngine();
+	
+	
 	camera = new Camera(0,0,window);
 	camera -> setCameraBounds(0, 0, 2205, 1928);
-	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 250, 250, 20);
 	
-	map = new Map();
+	map = new Map(world,camera,window);
+	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world, camera);
+	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world);
+	
 	
 	//camera -> zoom(2);
 }
@@ -66,7 +76,11 @@ void Engine::handleEvents() {
 
 void Engine::update() {
 	
+	world -> update(camera);
+	
 	player -> update();
+	object -> update();
+	
 	camera -> followObject(player -> player);
 	camera -> update(window);
 }
@@ -74,16 +88,31 @@ void Engine::update() {
 void Engine::render() {
 	SDL_RenderClear(renderer);
 	
-	map -> DrawMap(camera, window);
-	player -> render(camera);
 	
+	map -> DrawMap();
+	player -> render();
+	object -> render(camera);
+	
+	//world -> draw(camera);
 	SDL_RenderPresent(renderer);
 }
 
 void Engine::clean() {
 	
+	
+	
 	window -> clean();
+	
 	SDL_Quit();
+	
+	
+	delete world;
+	delete player;
+	delete object;
+	
+	delete camera;
+	delete window;
+	delete map;
 	
 	std::cout << "Game Cleaned. . ." << std::endl;
 	

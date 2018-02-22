@@ -14,6 +14,8 @@
 #include "GameObject.hpp"
 #include "Window.hpp"
 
+class GameObject;
+
 class Camera {
 public:
 	Camera(double x, double y, Window* window);
@@ -47,7 +49,7 @@ public:
 	};
 	
 	bool viewCulling = true;
-	bool cullCheck(int X, int Y);
+	static bool cullCheck(int X, int Y);
 	
 	
 private:
@@ -57,6 +59,7 @@ private:
 	
 	double xPos;
 	double yPos;
+	double scale = 1;
 	
 	double xGoal;
 	double yGoal;
@@ -67,16 +70,17 @@ private:
 	double maxSpeed = 25;
 	double friction = 0.05;
 	
-	int xBound;
-	int yBound;
-	int wBound;
-	int hBound;
 	
-	Window* window;
+	int xBound = -500;
+	int yBound = -500;
+	int wBound = 1000;
+	int hBound = 1000;
+	
+	static Window* window;
 	double windowWidth;
 	double windowHeight;
 	
-	double scale = 1.0;
+	GameObject* ObjectToFollow;
 	
 	void moveTo(double x, double y, double lerp);
 };
