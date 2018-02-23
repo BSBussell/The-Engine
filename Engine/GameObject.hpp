@@ -32,11 +32,11 @@ public:
 	
 	
 	
-	void update();
+	void update(double deltaTime);
 	void render();
 	
-	void moveXBy(double x);
-	void moveYBy(double y);
+	void moveXBy(double x, double deltaTime);
+	void moveYBy(double y, double deltaTime);
 	
 	int getX() {return xPos;};
 	int getY() {return yPos;};

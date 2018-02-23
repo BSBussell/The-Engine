@@ -47,7 +47,7 @@ GameObject::~GameObject() {
 
 
 
-void GameObject::update() {
+void GameObject::update(double deltaTime) {
 
 
 	srcRect.h  = 200;
@@ -68,14 +68,14 @@ void GameObject::render() {
 	TextureManager::Draw(objTexture, srcRect, destRect, localCamera);
 }
 
-void GameObject::moveXBy(double x) {
+void GameObject::moveXBy(double x, double deltaTime) {
 	//x = 1;
-	xPos = object->moveX(x);
+	xPos = object->moveX(x, deltaTime);
 	
 }
-void GameObject::moveYBy(double y) {
+void GameObject::moveYBy(double y, double deltaTime) {
 	
-	yPos = object->moveY(y);
+	yPos = object->moveY(y, deltaTime);
 }
 
 

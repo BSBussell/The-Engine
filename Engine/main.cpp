@@ -8,6 +8,9 @@
 
 #include "Engine.hpp"
 
+
+
+
 Engine *engine = nullptr;
 
 
@@ -38,7 +41,7 @@ int main( int argc, char* args[] ) {
 		frameStart = SDL_GetTicks();
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
-		deltaTime = ((NOW - LAST)*1000 / (double)SDL_GetPerformanceFrequency() );
+		deltaTime = ((NOW - LAST)*25 / (double)SDL_GetPerformanceFrequency() );
 
 		engine -> handleEvents();	// User Input, Keyboard etc
 		engine -> update(deltaTime);// Updates based on Events

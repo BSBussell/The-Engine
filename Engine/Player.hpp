@@ -33,11 +33,11 @@ public:
 	
 	bool active;
 	
-	int Speed = 60;
+	int Speed = 10;
 	double friction = 0.98;
 	
 	void events(SDL_Keycode event);
-	void update();
+	void update(double deltaTime);
 	void render();
 	
 protected:

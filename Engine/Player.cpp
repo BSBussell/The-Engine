@@ -38,25 +38,23 @@ void Player::events(SDL_Keycode event) {
 			dy++;
 }
 
-void Player::update() {
+void Player::update(double deltaTime) {
 	
 	dx *= friction;
 	dy *= friction;
 	
-	double x = player -> getX();
-	double y = player -> getY();
+	//double x = player -> getX();
+	//double y = player -> getY();
 	
+	//dx*= deltaTime;
+	//dy*= deltaTime;
 	
-	if (x+dx <=0 ) {
-		dx =dx* -0.25;
+	if (dx< Speed && dx >-Speed) {
+		player -> moveXBy(dx, deltaTime);
 	}
-	if (y+dy <=0 ) {
-		dy =dy* -0.25;
-	}
-	player -> moveXBy(dx);
-	player -> moveYBy(dy);
+	player -> moveYBy(dy, deltaTime);
 
-	player -> update();
+	player -> update(deltaTime);
 }
 
 void Player::render() {

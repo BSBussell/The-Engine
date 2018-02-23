@@ -36,7 +36,7 @@ SDL_Rect Camera::CalculateToCamera( SDL_Rect dest) {
 	return dest;
 }
 
-void Camera::update() {
+void Camera::update(double deltaTime) {
 	
 	if (ObjectToFollow) {
 		xGoal = ObjectToFollow -> getX();
@@ -54,29 +54,16 @@ void Camera::update() {
 	if ( yPos + yVel > yBound || yPos + yVel < -hBound) {
 		yVel = 0;
 	}
-	xPos += xVel;
-	yPos += yVel;
+	//std::cout << deltaTime << std:: endl;
+	xPos += xVel*deltaTime;
+	yPos += yVel*deltaTime;
 	
 	//window = wind;
 	windowWidth = window -> getWidth();
 	windowHeight = window -> getHeight();
 }
 
-void Camera::moveXBy(double x) {
-	double lerp = 0.1;
-	//xPos -= x*lerp;
-	if (xVel < maxSpeed && xVel > -maxSpeed) {
-		xVel += x*lerp;
-	}
-}
 
-void Camera::moveYBy(double y) {
-	double lerp = 0.1;
-	//yPos -= y*lerp;
-	if (yVel < maxSpeed && yVel > -maxSpeed) {
-		yVel += y*lerp;
-	}
-}
 
 void Camera::followObject(GameObject *object) {
 	

@@ -33,8 +33,8 @@ public:
 	
 	int id;
 	
-	double moveX(double x);
-	double moveY(double y);
+	double moveX(double x, double deltaTime);
+	double moveY(double y, double deltaTime);
 	
 	void updateProperties();
 	
@@ -57,7 +57,7 @@ public:
 	~physicsEngine();
 	
 	
-	void update();
+	void update(double deltaTime);
 	void draw();
 	
 	//static bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);

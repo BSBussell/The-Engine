@@ -18,7 +18,6 @@
 #include "Player.hpp"			// A Game object that can be move around
 
 
-
 physicsEngine* world;
 Camera* camera;
 Window* window;
@@ -77,12 +76,12 @@ void Engine::handleEvents() {
 	
 }
 
-void Engine::update() {
+void Engine::update(double deltaTime) {
 	
-	world -> update();
-	player -> update();
-	object -> update();
-	camera -> update();
+	world -> update(deltaTime);
+	player -> update(deltaTime);
+	object -> update(deltaTime);
+	camera -> update(deltaTime);
 }
 
 void Engine::render() {
