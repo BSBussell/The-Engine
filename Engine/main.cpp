@@ -8,6 +8,9 @@
 
 #include "Engine.hpp"
 
+
+
+
 Engine *engine = nullptr;
 
 
@@ -17,6 +20,9 @@ int main( int argc, char* args[] ) {
 	const int frameDelay = 1000 / FPS;
 	int fps = 0;
 	
+	Uint64 NOW = SDL_GetPerformanceCounter();
+	Uint64 LAST = 0;
+	double deltaTime = 0;
 	
 	Uint32 frameStart;
 	int frameTime;
@@ -33,9 +39,12 @@ int main( int argc, char* args[] ) {
 	while (engine -> running()) {
 		
 		frameStart = SDL_GetTicks();
+		LAST = NOW;
+		NOW = SDL_GetPerformanceCounter();
+		deltaTime = ((NOW - LAST)*25 / (double)SDL_GetPerformanceFrequency() );
 
 		engine -> handleEvents();	// User Input, Keyboard etc
-		engine -> update();			// Updates based on Events
+		engine -> update(deltaTime);// Updates based on Events
 		engine -> render();			// Draws based on Updates
 
 		frameTime = SDL_GetTicks() - frameStart;
@@ -50,5 +59,7 @@ int main( int argc, char* args[] ) {
 
 	engine -> clean();
 
+	delete engine;
+	
 	return 0;
 }

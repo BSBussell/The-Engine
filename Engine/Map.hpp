@@ -10,9 +10,10 @@
 #define Map_hpp
 
 #include <stdio.h>
+
 #include "Engine.hpp"
-#include "Camera.hpp"
 #include "Window.hpp"
+#include "Camera.hpp"
 #include "physicsEngine.hpp"
 
 class Map {

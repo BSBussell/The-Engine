@@ -33,8 +33,8 @@ public:
 	
 	int id;
 	
-	double moveX(double x);
-	double moveY(double y);
+	double moveX(double x, double deltaTime);
+	double moveY(double y, double deltaTime);
 	
 	void updateProperties();
 	
@@ -53,12 +53,12 @@ class physicsEngine {
 	
 public:
 	
-	physicsEngine();
+	physicsEngine(Camera* camera);
 	~physicsEngine();
 	
 	
-	
-	void draw(Camera* camera);
+	void update(double deltaTime);
+	void draw();
 	
 	//static bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);
 	bool checkAllCollision(SDL_Rect rect, int id);
@@ -66,8 +66,8 @@ public:
 	
 	void addObject(physicsObject newObject);
 	
-	void update(Camera* camera);
-	std::vector<physicsObject> objects;
+	std::vector<physicsObject*> objects;
+	std::vector<physicsObject*> inActiveObjects;
 	
 protected:
 	
@@ -75,7 +75,8 @@ protected:
 	
 private:
 	
-	std::vector<physicsObject> inActiveObjects;
+	Camera* localCamera;
+	
 	
 	
 };

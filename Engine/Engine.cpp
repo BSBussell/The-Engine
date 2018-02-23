@@ -7,22 +7,24 @@
 //
 
 #include "Engine.hpp"
-#include "TextureManager.hpp"
+#include "Window.hpp"			// For handleing and creating a new Window
+#include "Camera.hpp"			// For moaving a camera around and changing what can be seen on screen
+#include "TextureManager.hpp"	// Handles Textures and stuff
+#include "physicsEngine.hpp"	// Handles how objects will behave
 
 
-#include "Map.hpp"
-#include "GameObject.hpp"
-#include "Camera.hpp"
-#include "Player.hpp"
-#include "Window.hpp"
-#include "physicsEngine.hpp"
+#include "Map.hpp"				// For tile maps and drawing the map
+#include "GameObject.hpp"		// Any thing to be drawn uses this
+#include "Player.hpp"			// A Game object that can be move around
+
+
+physicsEngine* world;
+Camera* camera;
+Window* window;
 
 Player* player;
 GameObject* object;
 Map* map;
-physicsEngine* world;
-Camera* camera;
-Window* window;
 
 SDL_Renderer* Engine::renderer = nullptr;
 //extern SDL_Window* window;
@@ -38,20 +40,20 @@ Engine::~Engine() {
 
 void Engine::init(const char *title, int xPos, int yPos, int width, int height, bool fullScreen) {
 	
-	
 	window = new Window();
 	isRunning = window -> init(title, xPos, yPos, width, height, fullScreen);
 	renderer = window -> getRenderer();
 	
-	world = new physicsEngine();
-	
 	
 	camera = new Camera(0,0,window);
 	camera -> setCameraBounds(0, 0, 2205, 1928);
+	world = new physicsEngine(camera);
 	
 	map = new Map(world,camera,window);
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world, camera);
-	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world);
+	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world, camera);
+	
+	camera -> followObject(player -> player);
 	
 	
 	//camera -> zoom(2);
@@ -74,37 +76,31 @@ void Engine::handleEvents() {
 	
 }
 
-void Engine::update() {
+void Engine::update(double deltaTime) {
 	
-	world -> update(camera);
-	
-	player -> update();
-	object -> update();
-	
-	camera -> followObject(player -> player);
-	camera -> update(window);
+	world -> update(deltaTime);
+	player -> update(deltaTime);
+	object -> update(deltaTime);
+	camera -> update(deltaTime);
 }
 
 void Engine::render() {
 	SDL_RenderClear(renderer);
 	
-	
 	map -> DrawMap();
 	player -> render();
-	object -> render(camera);
+	object -> render();
 	
-	//world -> draw(camera);
+	world-> draw();
+	
 	SDL_RenderPresent(renderer);
 }
 
 void Engine::clean() {
 	
-	
-	
 	window -> clean();
 	
 	SDL_Quit();
-	
 	
 	delete world;
 	delete player;

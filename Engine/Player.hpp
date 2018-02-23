@@ -10,9 +10,10 @@
 #define Player_hpp
 
 #include <stdio.h>
-#include "GameObject.hpp"
+
 #include "Camera.hpp"
 #include "physicsEngine.hpp"
+#include "GameObject.hpp"
 
 class Player {
 	
@@ -32,11 +33,11 @@ public:
 	
 	bool active;
 	
-	int Speed = 60;
+	int Speed = 10;
 	double friction = 0.98;
 	
 	void events(SDL_Keycode event);
-	void update();
+	void update(double deltaTime);
 	void render();
 	
 protected:
@@ -46,9 +47,6 @@ protected:
 	
 
 private:
-	
-	physicsEngine* local_World;
-	Camera* local_Camera;
 	
 	double dx = 0;
 	double dy = 0;

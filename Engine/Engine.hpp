@@ -25,11 +25,9 @@ public:
 	
 	void init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen);
 	void handleEvents();
-	void update();
+	void update(double deltaTime);
 	void render();
 	void clean();
-	
-	Camera* camera;
 	
 	bool running()  { return isRunning; }
 	

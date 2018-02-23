@@ -11,8 +11,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "GameObject.hpp"
+
 #include "Window.hpp"
+#include "GameObject.hpp"
+
 
 class GameObject;
 
@@ -34,7 +36,7 @@ public:
 	void zoom(double zoom) {scale = zoom;};
 	void followObject(GameObject* object);
 	
-	void update(Window* window);
+	void update(double deltaTime);
 	
 	double getX() {return xPos;};
 	double getY() {return yPos;};
