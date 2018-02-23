@@ -65,7 +65,9 @@ public:
 	
 	
 	void addObject(physicsObject newObject);
-	std::vector<physicsObject> objects;
+	
+	std::vector<physicsObject*> objects;
+	std::vector<physicsObject*> inActiveObjects;
 	
 protected:
 	
@@ -75,7 +77,6 @@ private:
 	
 	Camera* localCamera;
 	
-	std::vector<physicsObject> inActiveObjects;
 	
 	
 };

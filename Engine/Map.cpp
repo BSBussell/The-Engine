@@ -63,13 +63,15 @@ void Map::LoadMap(int arr[20][25]) {
 			map[row][column] = arr[row][column];
 			dest.x = column * tileSize;
 			dest.y = row * tileSize;
-			tile = new physicsObject(dest, localWorld);
+			
 			if (map[row][column] == 0) {
+				tile = new physicsObject(dest, localWorld);
 				tile -> collidable = true;
+				tile -> updateProperties();
 			} else {
-				tile -> collidable = false;
+				//tile -> collidable = false;
 			}
-			tile -> updateProperties();
+			
 		}
 	}
 	delete tile;

@@ -92,6 +92,8 @@ void Engine::render() {
 	player -> render();
 	object -> render();
 	
+	world-> draw();
+	
 	SDL_RenderPresent(renderer);
 }
 

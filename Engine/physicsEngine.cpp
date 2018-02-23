@@ -21,7 +21,7 @@ physicsEngine::~physicsEngine() {
 
 bool physicsEngine::checkAllCollision(SDL_Rect rect, int id) {
 	for (auto &i : objects) {
-		if (SDL_HasIntersection(&rect, &i.dest) && i.collidable && (i.id != id)) {
+		if (SDL_HasIntersection(&rect, &i->dest) && i->collidable && (i->id != id)) {
 			//std::cout << "Collision" << std::endl;
 			return false;
 		}
@@ -31,22 +31,59 @@ bool physicsEngine::checkAllCollision(SDL_Rect rect, int id) {
 
 void physicsEngine::draw() {
 	for (auto &i : objects) {
-		if (i.collidable == 1){
-			TextureManager::DrawRect(i.dest, localCamera,255,0,0);
+		if (i->collidable == 1){
+			TextureManager::DrawRect(i->dest, localCamera,255,0,0);
 		} else {
-			TextureManager::DrawRect(i.dest, localCamera,255,255,255);
+			TextureManager::DrawRect(i->dest, localCamera,255,255,255);
 		}
 		//std::cout << i.collidable << std::endl;
 	}
 }
 
 void physicsEngine::update() {
+
+	SDL_Rect newRectangle;
+	// TODO: Write a loop that sorts through the object array
+	//       And checks if it's positions can not be seen by the camera
+	//		 If the camera doesn't see it then move it to the array inactive objs
+	for (int i = 0; i< objects.size(); i++) {
+		
+		newRectangle = localCamera->CalculateToCamera(objects[i]->dest);
+		if (!Camera::cullCheck(newRectangle.x, newRectangle.y)) {
+			physicsObject::counter--;
+			inActiveObjects.push_back(objects[i]);
+			objects.erase(objects.begin()+i);
+			i--;
+		} else {
+			objects[i]->id = i;//int(objects.size());
+			//objects.push_back(objects[i]);
+			//objects.erase(objects.begin()+i);
+		}
+	}
 	
+	for (int i = 0; i< inActiveObjects.size(); i++) {
+		newRectangle = localCamera->CalculateToCamera(inActiveObjects[i]->dest);
+		if (Camera::cullCheck(newRectangle.x, newRectangle.y)) {
+			physicsObject::counter++;
+			objects.push_back(inActiveObjects[i]);
+			inActiveObjects.erase(inActiveObjects.begin()+i);
+			
+			objects[i]->id = i;
+			//i--;
+		} else {
+			
+			//int(objects.size());
+			//objects.push_back(objects[i]);
+			//objects.erase(objects.begin()+i);
+		}
+	}
+	
+	// TODO: Do the same thing with a loop for inActiveObjects
 }
 
 void physicsEngine::addObject(physicsObject newObj) {
 	
-	objects.push_back(newObj);
+	objects.push_back(&newObj);
 }
 
 
@@ -85,6 +122,7 @@ double physicsObject::moveY(double y) {
 		dest.y += y;
 	}
 	
+	
 	updateProperties();
 	return dest.y;
 }
@@ -92,5 +130,5 @@ double physicsObject::moveY(double y) {
 void physicsObject::updateProperties() {
 	//id = 500;
 	//std::cout << id << std::endl;
-	localWorld->objects[id] = *this;
+	localWorld->objects[id] = this;
 }
