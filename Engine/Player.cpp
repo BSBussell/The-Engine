@@ -49,10 +49,11 @@ void Player::update(double deltaTime) {
 	//dx*= deltaTime;
 	//dy*= deltaTime;
 	
-	if (dx< Speed && dx >-Speed) {
+	//if (dx< Speed && dx >-Speed) {
 		player -> moveXBy(dx, deltaTime);
-	}
+	//}
 	player -> moveYBy(dy, deltaTime);
+	
 
 	player -> update(deltaTime);
 }

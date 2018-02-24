@@ -143,6 +143,7 @@ double physicsObject::moveX(double x, double deltaTime) {
 	} else {
 		//dest.x *= deltaTime;
 	}
+	std::cout << "DX: " << x*deltaTime << std::endl;
 	
 	updateProperties();
 	return dest.x;
@@ -158,7 +159,7 @@ double physicsObject::moveY(double y, double deltaTime) {
 	} else {
 		//dest.y *= deltaTime;
 	}
-	
+	//std::cout << "DY: " << y*deltaTime << std::endl;
 	
 	updateProperties();
 	return dest.y;
