@@ -38,18 +38,31 @@ Engine::~Engine() {
 	
 }
 
-void Engine::init(const char *title, int xPos, int yPos, int width, int height, bool fullScreen) {
+void Engine::init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen, json properties) {
 	
 	window = new Window();
 	isRunning = window -> init(title, xPos, yPos, width, height, fullScreen);
 	renderer = window -> getRenderer();
 	
+	if (properties["Camera"] != nullptr) {
+		for (auto& CameraPlist : properties["Camera"]) {
+			camera = new Camera(CameraPlist["x"],CameraPlist["y"],window);
+			camera -> setCameraBounds(CameraPlist["boundX"], CameraPlist["boundY"], CameraPlist["width"], CameraPlist["height"]);
+		}
+	}
 	
-	camera = new Camera(0,0,window);
-	camera -> setCameraBounds(0, 0, 2205, 1928);
-	world = new physicsEngine(camera);
+	if (properties["PhysicsWorld"] != nullptr) {
+		//for (auto& World : properties["World"]) {
+			world = new physicsEngine(camera);
+		//}
+	}
+	std::ifstream ifs("/Users/BenBusBoy/Documents/Engine/Engine/Engine/Data/Map.json");
+	json Level = json::parse(ifs);
 	
-	map = new Map(world,camera,window);
+	if (Level != nullptr) {
+		Level = Level["level1"];
+		map = new Map(world,camera,window,Level);
+	}
 	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world, camera);
 	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world, camera);
 	

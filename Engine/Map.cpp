@@ -10,34 +10,14 @@
 #include "TextureManager.hpp"
 
 
-int lvl1[20][25] = {
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,2,1,1,1,1,1},
-	{2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,1,2,2,2,2,2,1},
-	{1,1,1,1,1,1,1,1,1,2,1,0,0,0,0,0,0,0,1,1,2,1,1,1,1},
-	{1,0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,0,1,2,1,0,0,1},
-	{1,0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,0,1,2,1,0,0,1},
-	{1,0,0,0,0,1,1,1,1,2,1,1,1,1,0,0,0,0,0,1,2,1,0,0,1},
-	{1,0,0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0,0,1,1,1,0,0,1},
-	{1,0,0,0,0,1,2,1,1,1,1,1,2,1,1,1,1,1,1,0,0,0,0,0,1},
-	{1,0,0,0,0,1,2,1,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,1,2,1,1,1,1,1,2,1,1,1,1,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,1,2,2,2,2,2,2,2,1,0,0,1,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,1,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-};
+Map::Map(physicsEngine* world, Camera* camera, Window* window, json level) {
 
-Map::Map(physicsEngine* world, Camera* camera, Window* window) {
-
-	dirt = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/brownsquare.png");
-	grass = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/greensquare.jpg");
-	water = TextureManager::LoadTexture("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/bluesquare.png");
+	int counter = 0;
+	for ( auto &texture : level["Textures"]) {
+		std::string filePath = texture;
+		textures[counter] = TextureManager::LoadTexture(filePath.c_str());
+		counter++;
+	}
 
 	localWorld = world;
 	localCamera = camera;
@@ -45,10 +25,12 @@ Map::Map(physicsEngine* world, Camera* camera, Window* window) {
 
 	src.x = dest.x =  0;
 	src.y = dest.y =  0;
-	src.w = dest.w = tileSize;
-	src.h = dest.h = tileSize;
+	src.w = dest.w = level["tileWidth"];
+	src.h = dest.h = level["tileHeight"];
 	
-	LoadMap(lvl1);
+	crntMap = level;
+	
+	LoadMap(level);
 }
 
 Map::~Map() {
@@ -56,22 +38,19 @@ Map::~Map() {
 	
 }
 
-void Map::LoadMap(int arr[20][25]) {
-
-	for (int row = 0; row < 20; row++) {
-		for (int column = 0; column < 25; column++) {
-			map[row][column] = arr[row][column];
-			dest.x = column * tileSize;
-			dest.y = row * tileSize;
-			
-			if (map[row][column] == 0) {
+void Map::LoadMap(json Level) {
+	
+	int rowMax = Level["height"];
+	int colMax = Level["width"];
+	for (int row = 0; row < rowMax; row++) {
+		for (int column = 0; column < colMax; column++) {
+			if (Level["collisionLayer"][(column+(row*colMax))] == 1) {
+				dest.x = column * int(Level["tileWidth"]);
+				dest.y = row * int(Level["tileHeight"]);
 				tile = new physicsObject(dest, localWorld);
 				tile -> collidable = true;
 				tile -> updateProperties();
-			} else {
-				//tile -> collidable = false;
 			}
-			
 		}
 	}
 	delete tile;
@@ -81,14 +60,12 @@ void Map::LoadMap(int arr[20][25]) {
 void Map::DrawMap() {
 	
 	int type = 0;
-	int xMax = 25;
+	int xMax = crntMap["width"];
 	int xMin = 0;
-	int yMax = 20;
+	int yMax = crntMap["height"];
 	int yMin = 0;
 	int windowW = localWindow -> getWidth();
 	int windowH = localWindow -> getHeight();
-	
-	//tileSize = -129;
 	
 	/*
 		Calculates the lowest and highest values of the array 
@@ -96,6 +73,7 @@ void Map::DrawMap() {
 		Also use absolute value math to ensure that the number
 		is within the array
 	 */
+	int tileSize = crntMap["tileWidth"];
 	
 	if (localCamera -> viewCulling) {
 		xMax = abs(localCamera -> CalculateCamX(windowW+(tileSize))/tileSize);
@@ -107,28 +85,15 @@ void Map::DrawMap() {
 		yMin = (localCamera -> CalculateCamY(-tileSize)/tileSize);
 		yMin = (yMin + abs(yMin))/2;
 	}
-	//tileSize = 128;
+	
 	for (int row = yMin; row < yMax; row++) {
 		for (int column = xMin; column < xMax; column++) {
 			
+			type = crntMap["baseLayer"][(column+(row*int(crntMap["width"])))];
+			dest.x = (column * int(crntMap["tileWidth"]));
+			dest.y = (row * int(crntMap["tileHeight"]));
+			TextureManager::Draw(textures[type], src, dest,localCamera);
 			
-			type = map[row][column];
-			dest.x = (column * tileSize);
-			dest.y = (row * tileSize);
-
-			switch(type) {
-				case 0:
-					TextureManager::Draw(water, src, dest, localCamera);
-					break;
-				case 1:
-					TextureManager::Draw(grass, src, dest,localCamera);
-					break;
-				case 2:
-					TextureManager::Draw(dirt, src, dest,localCamera);
-					break;
-				default:
-					break;
-			}
 		}
 
 	}

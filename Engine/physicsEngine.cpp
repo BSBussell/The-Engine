@@ -139,7 +139,6 @@ double physicsObject::moveX(double x, double deltaTime) {
 	
 	if (colCheck) {
 		dest.x += x*deltaTime;
-		std::cout <<x*deltaTime << std::endl;
 	} else {
 		//dest.x *= deltaTime;
 	}

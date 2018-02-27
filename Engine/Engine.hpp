@@ -13,6 +13,12 @@
 #include <SDL2_image/SDL_image.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
+
+#include "json.hpp"
+
+using json = nlohmann::json;
+
 //#include "Camera.hpp"
 
 class Camera;
@@ -23,7 +29,7 @@ public:
 	Engine();
 	~Engine();
 	
-	void init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen);
+	void init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen, json properties);
 	void handleEvents();
 	void update(double deltaTime);
 	void render();
