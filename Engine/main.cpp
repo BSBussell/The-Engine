@@ -6,17 +6,22 @@
 //  Copyright © 2018 Benjamin Bussell. All rights reserved.
 //
 
+#include <iostream>
+#include <stdio.h>
+#include <fstream>
+#include "json.hpp"
+
 #include "Engine.hpp"
 
 
-
+using json = nlohmann::json;
 
 Engine *engine = nullptr;
 
 
 int main( int argc, char* args[] ) {
 
-	const int FPS = 60;
+	const int FPS = 30;
 	const int frameDelay = 1000 / FPS;
 	int fps = 0;
 	
@@ -34,7 +39,15 @@ int main( int argc, char* args[] ) {
 	Uint32 startTime = SDL_GetTicks();
 	int numFrames = 0;
 	// Initalizes Window
-	engine -> init("The Engine - ALPHA v0.0.3",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,1000,640,false);
+	
+	std::ifstream ifs("/Users/BenBusBoy/Documents/Engine/Engine/Engine/Data/Engine.json");
+	json j = json::parse(ifs);
+	
+	json window = j["Window"];
+	
+	std::string title = window["title"].get<std::string>();
+	
+	engine -> init(title.c_str(),window["x"],window["y"],window["width"],window["height"],window["fullScreen"], j);
 
 	while (engine -> running()) {
 		
@@ -42,14 +55,14 @@ int main( int argc, char* args[] ) {
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
 		deltaTime = ((NOW - LAST)*25 / (double)SDL_GetPerformanceFrequency() );
-
+		
 		engine -> handleEvents();	// User Input, Keyboard etc
 		engine -> update(deltaTime);// Updates based on Events
 		engine -> render();			// Draws based on Updates
 
 		frameTime = SDL_GetTicks() - frameStart;
 		numFrames ++;
-		
+	
 		fps = (numFrames/(float)(SDL_GetTicks() - startTime) )*1000;
 		//std::cout << ( numFrames/(float)(SDL_GetTicks() - startTime) )*1000 << std::endl;
 		if (fps>FPS) {

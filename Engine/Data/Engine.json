@@ -1,0 +1,68 @@
+{
+	"SceneName": "Scene 1",
+	"Window" : {
+		"title" : "The Engine - v0.0.5",
+		"x" : 0,
+		"y" : 0,
+		"width" : 1000,
+		"height" : 640,
+		"fullScreen" : false
+	},
+	"Camera": {
+		"cameras" : {
+			"Name": "camera",
+			"x" : 0,
+			"y" : 0,
+			"scale" : 1,
+			"boundX" : 0,
+			"boundY" : 0,
+			"width" : 2205,
+			"height" : 1928,
+			"Following" : "player",
+			"ExtScripts" : null
+		}
+	},
+	"PhysicsWorld" : {
+		"worlds" : {
+			"Name" : "world",
+			"Camera" : "camera",
+			"DrawCollisions" : true
+		}
+	},
+	"Player": {
+		"Name" : "player",
+		"Source" : "/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg",
+		"x" : 255,
+		"y" : 260,
+		"size" : 20,
+		"Camera" : "camera",
+		"World" : "world"
+	},
+	"GameObject": {
+		"Objects" : {
+			"Name" : "object",
+			"Source" : "/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png",
+			"x" : 350,
+			"y" : 350,
+			"width" : 200,
+			"height" : 200,
+			"Camera" : "camera",
+			"World" : "world",
+			"ExtScripts" : null
+		},
+		"Other" : {
+			"Name" : "object2",
+			"Source" : "/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png",
+			"x" : 350,
+			"y" : 450,
+			"width" : 200,
+			"height" : 200,
+			"Camera" : "camera",
+			"World" : "world",
+			"ExtScripts" : null
+		}
+	},
+	"KeyDown" : [
+		"player"
+	]
+}

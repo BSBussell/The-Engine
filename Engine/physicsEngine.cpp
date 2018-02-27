@@ -22,7 +22,7 @@ physicsEngine::~physicsEngine() {
 bool physicsEngine::checkAllCollision(SDL_Rect rect, int id) {
 	for (auto &i : objects) {
 		if (SDL_HasIntersection(&rect, &i->dest) && i->collidable && (i->id != id)) {
-			//std::cout << "Collision" << std::endl;
+		
 			return false;
 		}
 	}
@@ -36,7 +36,6 @@ void physicsEngine::draw() {
 		} else {
 			TextureManager::DrawRect(i->dest, localCamera,255,255,255);
 		}
-		//std::cout << i.collidable << std::endl;
 	}
 }
 
@@ -44,7 +43,6 @@ void physicsEngine::update(double deltaTime) {
 
 	SDL_Rect newRectangle;
 	for (int i = 0; i < std::max(objects.size(),inActiveObjects.size()); i++) {
-		
 		if (i < objects.size()) {
 			newRectangle = localCamera->CalculateToCamera(objects[i]->dest);
 			if (!Camera::cullCheck(newRectangle.x, newRectangle.y)) {
@@ -54,7 +52,6 @@ void physicsEngine::update(double deltaTime) {
 				i--;
 			} else {
 				objects[i]->id = i;
-				
 				
 			}
 		}
@@ -66,51 +63,10 @@ void physicsEngine::update(double deltaTime) {
 				inActiveObjects.erase(inActiveObjects.begin()+i);
 				
 				objects[i]->id = i;
-				//i--;
-			} else {
-				
-				//int(objects.size());
-				//objects.push_back(objects[i]);
-				//objects.erase(objects.begin()+i);
+			
 			}
 		}
 	}
-	// TODO: Write a loop that sorts through the object array
-	//       And checks if it's positions can not be seen by the camera
-	//		 If the camera doesn't see it then move it to the array inactive objs
-	/*for (int i = 0; i< objects.size(); i++) {
-		
-		newRectangle = localCamera->CalculateToCamera(objects[i]->dest);
-		if (!Camera::cullCheck(newRectangle.x, newRectangle.y)) {
-			physicsObject::counter--;
-			inActiveObjects.push_back(objects[i]);
-			objects.erase(objects.begin()+i);
-			i--;
-		} else {
-			objects[i]->id = i;//int(objects.size());
-			//objects.push_back(objects[i]);
-			//objects.erase(objects.begin()+i);
-		}
-	}
-	
-	for (int i = 0; i< inActiveObjects.size(); i++) {
-		newRectangle = localCamera->CalculateToCamera(inActiveObjects[i]->dest);
-		if (Camera::cullCheck(newRectangle.x, newRectangle.y)) {
-			physicsObject::counter++;
-			objects.push_back(inActiveObjects[i]);
-			inActiveObjects.erase(inActiveObjects.begin()+i);
-			
-			objects[i]->id = i;
-			//i--;
-		} else {
-			
-			//int(objects.size());
-			//objects.push_back(objects[i]);
-			//objects.erase(objects.begin()+i);
-		}
-	}*/
-	
-	// TODO: Do the same thing with a loop for inActiveObjects
 }
 
 void physicsEngine::addObject(physicsObject newObj) {
@@ -139,7 +95,6 @@ double physicsObject::moveX(double x, double deltaTime) {
 	
 	if (colCheck) {
 		dest.x += x*deltaTime;
-		std::cout <<x*deltaTime << std::endl;
 	} else {
 		//dest.x *= deltaTime;
 	}

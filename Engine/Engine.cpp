@@ -18,13 +18,13 @@
 #include "Player.hpp"			// A Game object that can be move around
 
 
-physicsEngine* world;
-Camera* camera;
+//physicsEngine* world;
+//Camera* camera;
 Window* window;
 
-Player* player;
-GameObject* object;
-Map* map;
+//Player* player;
+//GameObject* object;
+//Map* map;
 
 SDL_Renderer* Engine::renderer = nullptr;
 //extern SDL_Window* window;
@@ -38,25 +38,82 @@ Engine::~Engine() {
 	
 }
 
-void Engine::init(const char *title, int xPos, int yPos, int width, int height, bool fullScreen) {
+void Engine::init(const char* title, int xPos, int yPos, int width, int height, bool fullScreen, json properties) {
 	
 	window = new Window();
 	isRunning = window -> init(title, xPos, yPos, width, height, fullScreen);
 	renderer = window -> getRenderer();
 	
+	if (properties["Camera"] != nullptr) {
+		for (auto& CameraPlist : properties["Camera"]) {
+			std::string tempName = CameraPlist["Name"];
+			cameras[tempName] = new Camera(CameraPlist["x"],CameraPlist["y"],window);
+			cameras[tempName] -> setCameraBounds(CameraPlist["boundX"], CameraPlist["boundY"], CameraPlist["width"], CameraPlist["height"]);
+		}
+	}
 	
-	camera = new Camera(0,0,window);
-	camera -> setCameraBounds(0, 0, 2205, 1928);
-	world = new physicsEngine(camera);
+	if (properties["PhysicsWorld"] != nullptr) {
+		for (auto& World : properties["PhysicsWorld"]) {
+			std::string tempName = World["Name"];
+			std::string temp = World["Camera"];
+			physicsEngines[tempName] = new physicsEngine(cameras[temp]);
+			
+		}
+	}
+	std::cout << physicsEngines["world"] << std::endl;
 	
-	map = new Map(world,camera,window);
-	player = new Player("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/purpleSquare.jpg", 255, 260, 20, world, camera);
-	object = new GameObject("/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png","Colision Test",350,350,200,200, world, camera);
+	std::ifstream ifs("/Users/BenBusBoy/Documents/Engine/Engine/Engine/Data/Map.json");
+	json Level = json::parse(ifs);
 	
-	camera -> followObject(player -> player);
+	if (Level != nullptr) {
+		Level = Level["level1"];
+		std::string tempCam = Level["Camera"];
+		
+		std::string temp = Level["World"];
+		
+		maps["level1"] = new Map(physicsEngines[temp],cameras[tempCam],window,Level);
+	}
+	if (properties["Player"] != nullptr) {
+		json PlayerPlist = properties["Player"];
+		std::string temp = PlayerPlist["Source"];
+		const char* source = temp.c_str();
+		std::string localEngine = PlayerPlist["World"];
+		std::string localCamera = PlayerPlist["Camera"];
+		std::string tempName = PlayerPlist["Name"];
+		const char* name = tempName.c_str();
+		players[name] = new Player(source, int(PlayerPlist["x"]), int(PlayerPlist["y"]), int(PlayerPlist["size"]), physicsEngines[localEngine], cameras[localCamera]);
+		objects[name] = players[name] -> player;
+	}
+	if (properties["GameObject"] != nullptr) {
+		for (auto &ObjectPlist: properties["GameObject"]) {
+			std::string temp = ObjectPlist["Source"];
+			const char* source = temp.c_str();
+			std::string tempName = ObjectPlist["Name"];
+			const char* name = tempName.c_str();
+			std::string localEngine = ObjectPlist["World"];
+			std::string localCamera = ObjectPlist["Camera"];
+			objects[tempName] = new GameObject(source,name,ObjectPlist["x"],ObjectPlist["y"],ObjectPlist["width"],ObjectPlist["height"], physicsEngines[localEngine], cameras[localCamera]);
+		}
+	}
 	
+	if (properties["Camera"] != nullptr) {
+		for (auto &Cameras : properties["Camera"]) {
+			std::string tempName = Cameras["Following"];
+			const char* newplrName = tempName.c_str();
+			if (objects[newplrName] != nullptr) {
+				std::string tempName = Cameras["Name"];
+				const char* newName = tempName.c_str();
+				cameras[newName] -> followObject(objects[newplrName]);
+			}
+		}
+	}
 	
-	//camera -> zoom(2);
+	/*if (properties["KeyDown"]!= nullptr) {
+		for (auto &eventObjects : properties["KeyDown"]) {
+			eventObjects;
+		}
+	}*/
+	
 }
 
 void Engine::handleEvents() {
@@ -68,7 +125,8 @@ void Engine::handleEvents() {
 			isRunning = false;
 			break;
 		case SDL_KEYDOWN:
-			player -> events(event.key.keysym.sym);
+			
+			players["player"] -> events(event.key.keysym.sym);
 			break;
 		default:
 			break;
@@ -78,20 +136,34 @@ void Engine::handleEvents() {
 
 void Engine::update(double deltaTime) {
 	
-	world -> update(deltaTime);
-	player -> update(deltaTime);
-	object -> update(deltaTime);
-	camera -> update(deltaTime);
+	for (auto &updWorlds : physicsEngines) {
+		updWorlds.second -> update(deltaTime);
+	}
+	for (auto &characters : players) {
+		characters.second -> update(deltaTime);
+	}
+	for (auto &GameObjects : objects) {
+		GameObjects.second -> update(deltaTime);
+	}
+	for (auto &theCameras : cameras) {
+		theCameras.second -> update(deltaTime);
+	}
 }
 
 void Engine::render() {
 	SDL_RenderClear(renderer);
 	
-	map -> DrawMap();
-	player -> render();
-	object -> render();
+	maps["level1"] -> DrawMap();
+	for (auto &controllables: players) {
+		controllables.second -> render();
+	}
 	
-	world-> draw();
+	for (auto &GameObjects : objects) {
+		GameObjects.second -> render();
+	}
+	for (auto &worlds: physicsEngines) {
+		worlds.second -> draw();
+	}
 	
 	SDL_RenderPresent(renderer);
 }
@@ -102,13 +174,10 @@ void Engine::clean() {
 	
 	SDL_Quit();
 	
-	delete world;
-	delete player;
-	delete object;
+	// TODO: Fix the memory leaks
 	
-	delete camera;
 	delete window;
-	delete map;
+	
 	
 	std::cout << "Game Cleaned. . ." << std::endl;
 	

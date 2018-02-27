@@ -10,6 +10,7 @@
 #define Map_hpp
 
 #include <stdio.h>
+#include "json.hpp"
 
 #include "Engine.hpp"
 #include "Window.hpp"
@@ -23,10 +24,10 @@ public:
 	/*!
 	 * @discussion The Tile Map to be used with drawing and crap
 	 */
-	Map(physicsEngine* world, Camera* camera, Window* window);
+	Map(physicsEngine* world, Camera* camera, Window* window, json level);
 	~Map();
 	
-	void LoadMap(int arr[20][25]);
+	void LoadMap(json Level);
 	void DrawMap();
 	
 	
@@ -42,9 +43,10 @@ private:
 	SDL_Texture* dirt;
 	SDL_Texture* grass;
 	SDL_Texture* water;
+	
+	std::map<int, SDL_Texture*> textures;
 
-	int map[20][25];
-	int tileSize = 128;
+	json crntMap;
 };
 
 #endif /* Map_hpp */
