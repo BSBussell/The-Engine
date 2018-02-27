@@ -13,11 +13,6 @@
 		78416A77203B467F002AAB9B /* physicsEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78416A75203B467F002AAB9B /* physicsEngine.cpp */; };
 		78552B15202FCA29000C6620 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78552B14202FCA29000C6620 /* main.cpp */; };
 		78552B23202FCDD9000C6620 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78552B22202FCDD9000C6620 /* SDL2.framework */; };
-		78783E772040DDE6005A253E /* lauxlib.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 78783E722040DDE6005A253E /* lauxlib.h */; };
-		78783E782040DDE6005A253E /* lua.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 78783E732040DDE6005A253E /* lua.h */; };
-		78783E792040DDE6005A253E /* lua.hpp in Frameworks */ = {isa = PBXBuildFile; fileRef = 78783E742040DDE6005A253E /* lua.hpp */; };
-		78783E7A2040DDE6005A253E /* luaconf.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 78783E752040DDE6005A253E /* luaconf.h */; };
-		78783E7B2040DDE6005A253E /* lualib.h in Frameworks */ = {isa = PBXBuildFile; fileRef = 78783E762040DDE6005A253E /* lualib.h */; };
 		789B825C2034C04A007C08B4 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 789B825A2034C04A007C08B4 /* Camera.cpp */; };
 		78BEADE32031021700E925F6 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BEADE12031021700E925F6 /* GameObject.cpp */; };
 		78BEADE72031134F00E925F6 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BEADE52031134F00E925F6 /* TextureManager.cpp */; };
@@ -76,11 +71,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				783DCAF32043D12600B2BB01 /* nlohmann in Frameworks */,
-				78783E772040DDE6005A253E /* lauxlib.h in Frameworks */,
-				78783E782040DDE6005A253E /* lua.h in Frameworks */,
-				78783E792040DDE6005A253E /* lua.hpp in Frameworks */,
-				78783E7A2040DDE6005A253E /* luaconf.h in Frameworks */,
-				78783E7B2040DDE6005A253E /* lualib.h in Frameworks */,
 				78BEADE9203121CE00E925F6 /* SDL2_image.framework in Frameworks */,
 				78552B23202FCDD9000C6620 /* SDL2.framework in Frameworks */,
 			);
