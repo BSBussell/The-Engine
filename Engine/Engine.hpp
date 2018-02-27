@@ -52,6 +52,7 @@ private:
 	std::map<std::string, Player*> players;
 	std::map<std::string, GameObject*> objects;
 	std::map<std::string, Map*> maps;
+	std::map<std::string, std::string> KeyEvents;
 	
 	bool isRunning;
 	int crt = 0;

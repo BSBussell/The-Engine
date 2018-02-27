@@ -1,7 +1,7 @@
 {
 	"SceneName": "Scene 1",
 	"Window" : {
-		"title" : "The Engine - v0.0.4",
+		"title" : "The Engine - v0.0.5",
 		"x" : 0,
 		"y" : 0,
 		"width" : 1000,
@@ -49,9 +49,20 @@
 			"Camera" : "camera",
 			"World" : "world",
 			"ExtScripts" : null
+		},
+		"Other" : {
+			"Name" : "object2",
+			"Source" : "/Users/BenBusBoy/Documents/Engine/Engine/Assets.xcassets/Square.png",
+			"x" : 350,
+			"y" : 450,
+			"width" : 200,
+			"height" : 200,
+			"Camera" : "camera",
+			"World" : "world",
+			"ExtScripts" : null
 		}
 	},
-	"KeyDown" : {
-		"keyEvents" : ["player"]
-	}
+	"KeyDown" : [
+		"player"
+	]
 }

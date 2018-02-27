@@ -18,13 +18,13 @@
 #include "Player.hpp"			// A Game object that can be move around
 
 
-physicsEngine* world;
-Camera* camera;
+//physicsEngine* world;
+//Camera* camera;
 Window* window;
 
-Player* player;
-GameObject* object;
-Map* map;
+//Player* player;
+//GameObject* object;
+//Map* map;
 
 SDL_Renderer* Engine::renderer = nullptr;
 //extern SDL_Window* window;
@@ -108,6 +108,11 @@ void Engine::init(const char* title, int xPos, int yPos, int width, int height, 
 		}
 	}
 	
+	/*if (properties["KeyDown"]!= nullptr) {
+		for (auto &eventObjects : properties["KeyDown"]) {
+			eventObjects;
+		}
+	}*/
 	
 }
 
@@ -169,13 +174,10 @@ void Engine::clean() {
 	
 	SDL_Quit();
 	
-	delete world;
-	delete player;
-	delete object;
+	// TODO: Fix the memory leaks
 	
-	delete camera;
 	delete window;
-	delete map;
+	
 	
 	std::cout << "Game Cleaned. . ." << std::endl;
 	
