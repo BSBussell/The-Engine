@@ -1,5 +1,5 @@
 # The Engine
-##### A Game Engine Built on C++ and Programmed by JSON
+##### A Game Engine Built on C++ and Programmed with JSON
 ![ Build | Passing ](https://img.shields.io/badge/Build-runs-brightgreen.svg?longCache=true&style=flat-square)
 ![ Version | v0.0.5 ](https://img.shields.io/badge/Version-v0.0.5-blue.svg?longCache=true&style=flat-square)
 [![GitHub license](https://img.shields.io/github/license/BSBussell/The-Engine.svg?style=flat-square)](https://github.com/BSBussell/The-Engine/blob/master/LICENSE)
@@ -8,48 +8,40 @@
 ------
 ![GIF Demonstration](https://github.com/BSBussell/The-Engine/raw/master/Media/Demonstration.gif)
 
-```JSON
-"Camera": {
-		"cameras" : {
-			"Name": "camera",
-			"x" : 0,
-			"y" : 0,
-			"scale" : 1,
-			"Following" : "player",
-			"ExtScripts" : null
-		}
-	},
-	"PhysicsWorld" : {
-		"worlds" : {
-			"Name" : "world",
-			"Camera" : "camera",
-			"DrawCollisions" : true
-		}
-	},
-	"Player": {
-		"Name" : "player",
-		"x" : 255,
-		"y" : 260,
-		"Camera" : "camera",
-		"World" : "world"
-	},
+
+
+## Key Features
+* Camera Library
+    * Control what the player can see
+* Collision/Pseudo Physics Library
+	 * Control what the player can run into
+* GameObject Library.
+* Tile Map Library
+	 * Control Where the player is
+* Example Player Library
+* Flexability
+     * Well Kind of 
+
+## Purpose
+To be a fun and powerful Game Engine. Made completly open source and community based. 
+
+## How to Use
+You will need [Git](https://git-scm.com/downloads) and [SDL2](https://www.libsdl.org/download-2.0.php) to clone and build the engine. On OSX you'll need the XCode command line tools:
 ```
 
-### Features
-* A Camera Library
-    * With a follow function
-* A Map loading library
-    * Load's map from array
-    * I Optimized this to the best of my ability.
-* A GameObject Handler to make handling objects simple.
-    * Handles sizing textures and stuff
-* An optional Player Libray
-    * Velocity based movement.
-* Window/Renderer Manager
+# Clone this repository
+$ git clone https://github.com/BSBussell/The-Engine
 
-#### TODO:
-- [x] Physics/Collision Engine
-- [x] Load Game from JSON File
-- [ ] GUI Editor
-- [ ] Make Scriptable with Python/Lua
+```
+On OSX simply open up the XCode project and Compile it<br>
+Its probably a bit different on Windows but I'll cross that bridge when I get there.
+
+## Download
+To Download the latest static release go [here](https://github.com/BSBussell/The-Engine/releases/) 
+
+## Credits
+Used resources from multiple youtube tutorials also used a library for JSON parseing
+* [JSON For Modern C++](https://github.com/nlohmann/json)
+<br>
+
 
