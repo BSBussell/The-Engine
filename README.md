@@ -18,6 +18,7 @@
 
 #### TODO:
 - [x] Physics/Collision Engine
-- [ ] Make Scriptable with Lua
-- [ ] Make Scriptable with Python
+- [x] Load Game from JSON File
 - [ ] GUI Editor
+- [ ] Make Scriptable with Python/Lua
+
