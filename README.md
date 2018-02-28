@@ -6,7 +6,34 @@
 [![GitHub issues](https://img.shields.io/github/issues/BSBussell/The-Engine.svg?style=flat-square)](https://github.com/BSBussell/The-Engine/issues)
 
 ------
+![GIF Demonstration](
 
+```JSON
+"Camera": {
+		"cameras" : {
+			"Name": "camera",
+			"x" : 0,
+			"y" : 0,
+			"scale" : 1,
+			"Following" : "player",
+			"ExtScripts" : null
+		}
+	},
+	"PhysicsWorld" : {
+		"worlds" : {
+			"Name" : "world",
+			"Camera" : "camera",
+			"DrawCollisions" : true
+		}
+	},
+	"Player": {
+		"Name" : "player",
+		"x" : 255,
+		"y" : 260,
+		"Camera" : "camera",
+		"World" : "world"
+	},
+```
 
 ### Features
 * A Camera Library

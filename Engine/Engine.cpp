@@ -162,7 +162,7 @@ void Engine::render() {
 		GameObjects.second -> render();
 	}
 	for (auto &worlds: physicsEngines) {
-		worlds.second -> draw();
+		//worlds.second -> draw();
 	}
 	
 	SDL_RenderPresent(renderer);
