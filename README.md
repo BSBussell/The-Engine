@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/BSBussell/The-Engine.svg?style=flat-square)](https://github.com/BSBussell/The-Engine/issues)
 
 ------
-![GIF Demonstration](
+![GIF Demonstration](https://github.com/BSBussell/The-Engine/raw/master/Media/Demonstration.gif)
 
 ```JSON
 "Camera": {
