@@ -23,7 +23,7 @@
      * Well Kind of 
 
 ## Purpose
-To be a fun and powerful Game Engine. Made completly open source and community based. 
+To be a fun and powerful Game Engine. Made completly open source and community based. Really, it's just a fun project I made to learn and have fun developing a game engine.
 
 ## How to Use
 You will need [Git](https://git-scm.com/downloads) and [SDL2](https://www.libsdl.org/download-2.0.php) to clone and build the engine. On OSX you'll need the XCode command line tools:
