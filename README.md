@@ -1,5 +1,5 @@
 # The Engine
-##### A Game Engine Built on C++ and Programmed with JSON
+##### A Game Engine Built on C++ and Scriptable with JSON
 
 ![Build Passing](https://img.shields.io/badge/build-passing-green.svg?longCache=true&style=for-the-badge)
 ![ Version | v0.0.5 ](https://img.shields.io/badge/Version-v0.0.5-blue.svg?longCache=true&style=for-the-badge)
