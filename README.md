@@ -1,7 +1,7 @@
 # The Engine
 ##### A Game Engine Built on C++ and Programmed with JSON
-![ Build | Passing ](https://img.shields.io/badge/Build-runs-brightgreen.svg?longCache=true&style=flat-square)
-![ Version | v0.0.5 ](https://img.shields.io/badge/Version-v0.0.5-blue.svg?longCache=true&style=flat-square)
+![ Build | Passing ](https://img.shields.io/badge/build-passing-green.svg?longCache=true&style=for-the-badge)
+![ Version | v0.0.5 ](https://img.shields.io/badge/Version-v0.0.5-blue.svg?longCache=true&style=for-the-badge)
 [![GitHub license](https://img.shields.io/github/license/BSBussell/The-Engine.svg?style=flat-square)](https://github.com/BSBussell/The-Engine/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/BSBussell/The-Engine.svg?style=flat-square)](https://github.com/BSBussell/The-Engine/issues)
 
